@@ -1,339 +1,337 @@
 ---
 Document ID: OSEF-SPE-101
 Title: OSEF Specification
-Version: 0.1.0
+Version: 0.2.0
 Status: Draft
 Authority: Normative
 Owner: OSEF Architecture Board
 Classification: Public
 Created: 2026-07-27
 Last Updated: 2026-07-27
+Next Review: TBD
 
 Related Documents:
 
-- Manifesto.md
-- Core-Principles.md
-- Project-Charter.md
-- Vision.md
-- Governance.md
-- Architecture.md
-- SDLC.md
-- Meta-Model.md
-- Artifact-Model.md
-- Project-Manifest-Specification.md
-- Versioning-Specification.md
-- Document-ID-Specification.md
+- OSEF-MAN-001
+- OSEF-VIS-001
+- OSEF-CPR-001
+- OSEF-CHA-001
 
+- OSEF-SPE-102
+- OSEF-SPE-103
+- OSEF-SPE-104
+- OSEF-SPE-105
+- OSEF-SPE-106
+- OSEF-SPE-107
+- OSEF-SPE-108
+- OSEF-SPE-109
+- OSEF-SPE-110
+- OSEF-SPE-111
+- OSEF-SPE-112
+- OSEF-SPE-113
+- OSEF-SPE-114
+- OSEF-SPE-115
+- OSEF-SPE-116
+- OSEF-SPE-117
+
+- OSEF-ARC-001
+- OSEF-MTM-001
+- OSEF-ATM-001
+- OSEF-SDL-001
 ---
 
 # OSEF Specification
 
 ## 1. Purpose
 
-The OSEF Specification defines the official engineering model for designing, building, validating, and evolving Intelligent Operating Systems.
+This document defines the overall structure, organization, and normative composition of the Operating Systems Engineering Framework (OSEF).
 
-This document represents the central specification of the Operating Systems Engineering Framework.
+It establishes the official specification hierarchy, defines the relationship between engineering specifications, and identifies the normative sources governing every OSEF implementation.
 
-OSEF does not define a programming language, software library, or artificial intelligence model.
+This document serves as the root specification of the framework.
 
-OSEF defines an engineering discipline.
+Every other normative specification derives from this document.
 
 ---
 
 # 2. Scope
 
-OSEF provides:
+This specification defines:
 
-- engineering principles;
-- lifecycle methodology;
-- governance mechanisms;
-- architecture guidelines;
-- artifact management;
-- traceability rules;
-- knowledge management practices;
-- validation standards.
+- the purpose of OSEF;
+- the organization of the specification;
+- the normative hierarchy;
+- engineering domains;
+- specification dependencies;
+- conformance relationships.
 
-OSEF enables teams and individuals to create intelligent systems that are:
+It does not define implementation details.
 
-- understandable;
-- maintainable;
-- explainable;
-- reusable;
-- traceable;
-- continuously evolvable.
+Those are delegated to specialized specifications.
 
 ---
 
-# 3. What is an Intelligent Operating System?
+# 3. Engineering Philosophy
 
-An Intelligent Operating System is a software system designed to coordinate:
+OSEF is an engineering framework.
 
-- artificial intelligence capabilities;
-- workflows;
-- knowledge;
-- tools;
-- resources;
-- human decisions.
+It is not:
 
-An Intelligent Operating System is not defined only by the presence of AI models.
+- a programming language;
+- an AI framework;
+- an orchestration engine;
+- a software library.
 
-Its value comes from the engineering structure that allows it to evolve safely and consistently.
+OSEF defines an engineering discipline for building Intelligent Operating Systems.
 
----
+Engineering always precedes implementation.
 
-# 4. OSEF Philosophy
+Specifications always precede engineering.
 
-OSEF is based on four engineering disciplines:
+Architecture always precedes code.
 
-## Software Engineering
-
-Provides:
-
-- architecture;
-- development practices;
-- testing;
-- maintainability.
+Knowledge continuously improves the system.
 
 ---
 
-## Knowledge Engineering
+# 4. Specification Architecture
 
-Provides:
+The OSEF specification is organized as a hierarchy of normative documents.
 
-- knowledge representation;
-- reuse;
-- learning;
-- organizational memory.
+```
+Foundation
+        │
+        ▼
+Core Specifications
+        │
+        ▼
+Engineering
+        │
+        ▼
+Runtime
+        │
+        ▼
+Reference Implementations
+```
 
----
-
-## Artificial Intelligence Engineering
-
-Provides:
-
-- intelligent capabilities;
-- agent systems;
-- model integration;
-- automation.
-
----
-
-## Technology Governance
-
-Provides:
-
-- decision control;
-- accountability;
-- evolution management.
+Each level depends only on the specifications above it.
 
 ---
 
-# 5. Core Model
+# 5. Foundation Documents
 
-OSEF organizes engineering through five fundamental concepts:
+Foundation documents establish the identity of OSEF.
+
+They include:
+
+- Manifesto
+- Vision
+- Core Principles
+- Project Charter
+
+These documents answer:
+
+Why does OSEF exist?
+
+---
+
+# 6. Core Specifications
+
+Core Specifications define the engineering rules of the framework.
+
+Current specifications include:
+
+101 OSEF Specification
+
+102 Versioning Specification
+
+103 Document ID Specification
+
+104 Project Manifest Specification
+
+105 Conformance Specification
+
+106 Quality Specification
+
+107 Security Specification
+
+108 Agent Specification
+
+109 Knowledge Specification
+
+110 Governance Specification
+
+111 Workflow Specification
+
+112 Capability Specification
+
+113 Skill Specification
+
+114 Tool Specification
+
+115 Resource Specification
+
+116 Memory Specification
+
+117 Policy Specification
+
+These documents define what every compliant OSEF implementation shall follow.
+
+---
+
+# 7. Engineering Specifications
+
+Engineering specifications define how systems are designed.
+
+They include:
+
+- Architecture
+- Meta Model
+- Artifact Model
+- SDLC
+- Glossary
+
+These documents transform engineering principles into engineering methodology.
+
+---
+
+# 8. Runtime Specifications
+
+Runtime assets provide executable support for OSEF.
+
+Examples include:
+
+- configuration
+- schemas
+- templates
+- validators
+- generators
+- runtime services
+
+These assets automate engineering without replacing engineering decisions.
+
+---
+
+# 9. Reference Implementations
+
+Reference implementations validate the framework through real systems.
+
+Examples include:
+
+- Personal OS
+- Marketing OS
+
+Reference implementations demonstrate how the specifications are applied.
+
+They are informative implementations rather than normative definitions.
+
+---
+
+# 10. Engineering Stack
+
+OSEF organizes intelligent systems through the following execution hierarchy.
+
+```
+Mission
+        │
+        ▼
+Agent
+        │
+        ▼
+Workflow
+        │
+        ▼
+Capability
+        │
+        ▼
+Skill
+        │
+        ▼
+Tool
+        │
+        ▼
+Resource
+```
+
+Memory, Knowledge, Governance and Policies operate as cross-cutting concerns across every layer.
+
+---
+
+# 11. Specification Dependencies
+
+Every specification has a clearly defined responsibility.
+
+```
+OSEF Specification
+        │
+        ├── Versioning
+        ├── Document IDs
+        ├── Project Manifest
+        ├── Conformance
+        ├── Quality
+        ├── Security
+        ├── Governance
+        ├── Agent
+        ├── Workflow
+        ├── Capability
+        ├── Skill
+        ├── Tool
+        ├── Resource
+        ├── Memory
+        └── Policy
+```
+
+Engineering documents depend on these specifications.
+
+Implementations depend on both.
+
+---
+
+# 12. Traceability
+
+OSEF requires complete engineering traceability.
 
 ```
 Vision
-
-    ↓
-
-Specification
-
-    ↓
-
+      ↓
+Mission
+      ↓
+Requirements
+      ↓
+Specifications
+      ↓
 Architecture
-
-    ↓
-
+      ↓
 Implementation
-
-    ↓
-
+      ↓
+Validation
+      ↓
 Knowledge
 ```
 
-Every implementation must preserve traceability between these elements.
+No engineering artifact should exist without traceable origin.
 
 ---
 
-# 6. Specification Driven Development
+# 13. Conformance
 
-OSEF follows a specification-driven approach.
+Conformance is defined by OSEF-SPE-105.
 
-The specification is the source of truth.
+An implementation claiming OSEF compliance shall:
 
-The development sequence is:
-
-```
-Understand
-
-↓
-
-Specify
-
-↓
-
-Design
-
-↓
-
-Implement
-
-↓
-
-Validate
-
-↓
-
-Learn
-
-↓
-
-Improve
-```
-
-Implementation without specification creates uncontrolled evolution.
+- follow normative specifications;
+- preserve architectural consistency;
+- maintain traceability;
+- apply governance rules;
+- satisfy validation requirements.
 
 ---
 
-# 7. Framework Structure
+# 14. Evolution
 
-OSEF is organized into the following layers:
+The framework evolves through controlled engineering.
 
-```
-000-foundation
-
-Purpose and identity of the framework.
-
-
-100-core-specifications
-
-Normative definitions of OSEF.
-
-
-110-governance
-
-Decision and evolution mechanisms.
-
-
-200-engineering
-
-Engineering models and methodologies.
-
-
-300-runtime
-
-Executable framework components.
-
-
-400-reference-implementations
-
-Projects built using OSEF.
-
-
-900-informative
-
-Supporting documentation.
-```
-
----
-
-# 8. Normative Documents
-
-The following documents define mandatory OSEF concepts.
-
-## Foundation
-
-Defines:
-
-- identity;
-- philosophy;
-- objectives.
-
-Documents:
-
-- Manifesto
-- Core Principles
-- Project Charter
-- Vision
-
----
-
-## Core Specifications
-
-Defines:
-
-- framework rules;
-- project requirements;
-- document management;
-- versioning.
-
-Documents:
-
-- OSEF Specification
-- Project Manifest Specification
-- Document ID Specification
-- Versioning Specification
-
----
-
-## Governance
-
-Defines:
-
-- decision processes;
-- change management;
-- quality controls.
-
-Document:
-
-- Governance
-
----
-
-## Engineering
-
-Defines:
-
-- architecture;
-- lifecycle;
-- artifacts;
-- models.
-
-Documents:
-
-- Architecture
-- SDLC
-- Artifact Model
-- Meta Model
-- Glossary
-
----
-
-# 9. Compliance
-
-A project claiming OSEF compatibility must:
-
-- follow the defined lifecycle;
-- maintain required artifacts;
-- preserve traceability;
-- document important decisions;
-- apply governance principles;
-- validate changes.
-
-Detailed compliance requirements are defined in:
-
-```
-Conformance Specification
-```
-
----
-
-# 10. Evolution Model
-
-OSEF evolves through controlled versions.
-
-Changes require:
+Every significant change follows:
 
 ```
 Proposal
@@ -344,7 +342,11 @@ Review
 
 ↓
 
-Decision
+RFC
+
+↓
+
+Approval
 
 ↓
 
@@ -359,60 +361,28 @@ Validation
 Release
 ```
 
-Major changes must preserve compatibility with existing principles.
+The architecture of the framework should evolve incrementally while preserving backward compatibility whenever possible.
 
 ---
 
-# 11. Design Principles
+# 15. Authority
 
-All OSEF implementations must preserve:
+This specification is the root normative document of OSEF.
 
-- Architecture before implementation.
-- Documentation as part of the product.
-- Knowledge as a first-class artifact.
-- Human responsibility for critical decisions.
-- Reuse before creation.
-- Continuous improvement.
-- Engineering before automation.
+If two specifications appear to conflict, precedence shall follow:
 
----
-
-# 12. Reference Implementation
-
-OSEF will validate itself through real implementations.
-
-Initial reference implementations:
-
-- Personal OS
-- Marketing OS
-
-These projects demonstrate how OSEF principles can be applied to real intelligent systems.
+1. OSEF Specification
+2. Core Specifications
+3. Engineering Specifications
+4. Runtime Specifications
+5. Informative Documents
 
 ---
 
-# 13. Future Evolution
+# 16. Conclusion
 
-Future versions of OSEF may include:
+The OSEF Specification defines the official structure of the Operating Systems Engineering Framework.
 
-- automated validation;
-- project generators;
-- compliance tooling;
-- knowledge systems;
-- AI-assisted engineering;
-- ecosystem extensions.
+Rather than describing individual engineering concepts, it establishes how the complete body of specifications is organized, related, governed, and evolved.
 
-All future capabilities must preserve the foundational principles defined by this specification.
-
----
-
-# 14. Status
-
-Current version:
-
-```
-OSEF 0.1.0
-
-Foundation Stage
-```
-
-This version establishes the conceptual and architectural foundation required for future implementation.
+Every normative specification, engineering methodology, runtime component, and reference implementation derives its authority from this document.

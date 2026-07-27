@@ -1,20 +1,33 @@
 ---
 Document ID: OSEF-ATM-001
 Title: Artifact Model
-Version: 0.1.0
+Version: 0.2.0
 Status: Draft
 Authority: Normative
 Owner: OSEF Architecture Board
 Classification: Public
 Created: 2026-07-26
-Last Updated: 2026-07-26
-Next Review: TBD
+Last Updated: 2026-07-27
+
 Related Documents:
-  - OSEF-MTM-001
-  - OSEF-ARC-001
-  - OSEF-SDL-001
-  - OSEF-GOV-001
-  - OSEF-CPR-001
+
+- OSEF-SPE-101
+- OSEF-SPE-105
+- OSEF-SPE-106
+- OSEF-SPE-107
+- OSEF-SPE-108
+- OSEF-SPE-109
+- OSEF-SPE-110
+- OSEF-SPE-111
+- OSEF-SPE-112
+- OSEF-SPE-113
+- OSEF-SPE-114
+- OSEF-SPE-115
+- OSEF-SPE-116
+- OSEF-SPE-117
+- OSEF-MTM-001
+- OSEF-ARC-001
+- OSEF-SDL-001
 ---
 
 # Artifact Model
@@ -23,31 +36,11 @@ Related Documents:
 
 The OSEF Artifact Model defines the engineering artifacts that may exist throughout the lifecycle of an Intelligent Operating System.
 
-Artifacts are considered first-class engineering assets.
+Artifacts are first-class engineering assets.
 
-They preserve engineering knowledge, document decisions, enable traceability, support governance, and facilitate continuous evolution.
+They preserve engineering intent, architecture, governance, implementation knowledge, operational evidence, and organizational learning.
 
 Every significant engineering activity should produce one or more artifacts.
-
----
-
-# What Is an Artifact?
-
-An artifact is any persistent engineering asset created, modified, or maintained during the lifecycle of a project.
-
-Artifacts may represent:
-
-- Vision
-- Decisions
-- Specifications
-- Architecture
-- Design
-- Implementation
-- Validation
-- Operations
-- Knowledge
-
-Every artifact has an identity, a lifecycle, relationships with other artifacts, and a clearly defined purpose.
 
 ---
 
@@ -59,24 +52,29 @@ Engineering evolves through artifacts.
 
 Artifacts preserve knowledge beyond the lifetime of any individual engineer, AI model, or implementation.
 
-Within OSEF, artifacts are the primary units of engineering knowledge.
+Within OSEF, every decision, specification, implementation, validation result, and operational learning should be represented by explicit artifacts.
+
+Artifacts are therefore the primary mechanism for traceability, governance, and continuous evolution.
 
 ---
 
 # Artifact Categories
 
-OSEF classifies artifacts into eight engineering categories.
+OSEF classifies artifacts into nine engineering categories.
 
-## 1. Vision Artifacts
+---
 
-Define the purpose and strategic direction of a project.
+## 1. Foundation Artifacts
+
+Define the identity and purpose of the framework or project.
 
 Examples:
 
 - Manifesto
 - Vision
+- Core Principles
 - Project Charter
-- Roadmap
+- Terminology
 
 These artifacts answer:
 
@@ -86,20 +84,20 @@ These artifacts answer:
 
 ## 2. Governance Artifacts
 
-Define how engineering decisions are managed.
+Define how engineering decisions are proposed, evaluated, approved, and evolved.
 
 Examples:
 
-- Governance
-- RFC
-- ADR
-- Decision Log
-- Change Log
-- Version History
+- Governance Specification
+- RFCs
+- ADRs
+- Decision Logs
+- Change Logs
+- Compliance Reports
 
 These artifacts answer:
 
-> How should the project evolve?
+> How is engineering controlled?
 
 ---
 
@@ -109,14 +107,14 @@ Describe the system before implementation.
 
 Examples:
 
-- Requirements
-- Architecture
-- Meta Model
-- Artifact Model
-- Agent Specification
+- OSEF Specification
 - Capability Specification
-- Skill Specification
 - Workflow Specification
+- Agent Specification
+- Policy Specification
+- Memory Specification
+- Security Specification
+- Quality Specification
 
 These artifacts answer:
 
@@ -124,55 +122,77 @@ These artifacts answer:
 
 ---
 
-## 4. Implementation Artifacts
+## 4. Architecture Artifacts
 
-Represent the implemented solution.
+Describe the conceptual and structural organization of the system.
+
+Examples:
+
+- Architecture
+- Meta Model
+- Artifact Model
+- Domain Models
+- Reference Architectures
+
+These artifacts answer:
+
+> How is the system organized?
+
+---
+
+## 5. Implementation Artifacts
+
+Represent executable engineering assets.
 
 Examples:
 
 - Source Code
 - Configuration Files
-- Scripts
 - Prompt Libraries
-- Infrastructure as Code
+- Runtime Components
+- Templates
+- CLI Commands
+- Validators
+- Generators
 
 These artifacts answer:
 
-> How was the solution implemented?
+> How is the system implemented?
 
 ---
 
-## 5. Validation Artifacts
+## 6. Validation Artifacts
 
-Demonstrate that the implementation satisfies its requirements.
+Provide objective evidence that engineering expectations have been satisfied.
 
 Examples:
 
 - Unit Tests
 - Integration Tests
-- System Tests
-- QA Reports
-- Benchmark Results
+- Conformance Reports
 - Security Assessments
+- Quality Reports
+- Benchmarks
+- Evaluation Results
 
 These artifacts answer:
 
-> Has the solution been verified?
+> Has the system been verified?
 
 ---
 
-## 6. Operations Artifacts
+## 7. Operational Artifacts
 
-Support deployment and production operation.
+Support runtime execution and production operation.
 
 Examples:
 
-- Release Notes
-- Deployment Guides
 - Runbooks
-- Dashboards
+- Deployment Guides
 - Monitoring Configuration
 - Incident Reports
+- Runtime Logs
+- Operational Dashboards
 
 These artifacts answer:
 
@@ -180,18 +200,18 @@ These artifacts answer:
 
 ---
 
-## 7. Knowledge Artifacts
+## 8. Knowledge Artifacts
 
-Capture reusable engineering knowledge.
+Capture validated engineering knowledge for future reuse.
 
 Examples:
 
-- Engineering Memory
-- Lessons Learned
 - Knowledge Base
+- Lessons Learned
 - Best Practices
 - Retrospectives
 - Design Patterns
+- Engineering Memory Snapshots
 
 These artifacts answer:
 
@@ -199,59 +219,63 @@ These artifacts answer:
 
 ---
 
-## 8. Automation Artifacts
+## 9. Automation Artifacts
 
 Support repeatable engineering activities.
 
 Examples:
 
 - Templates
-- Checklists
 - Validation Rules
-- CI/CD Pipelines
 - Engineering Workflows
+- CI/CD Pipelines
+- Automation Scripts
+- Project Generators
 
 These artifacts answer:
 
-> How can engineering be performed consistently?
+> How is engineering automated?
 
 ---
 
-# Common Attributes
+# Artifact Metadata
 
-Every artifact should define, at minimum:
+Every artifact should define at minimum:
 
-- Artifact Identifier
+- Identifier
 - Title
 - Category
 - Version
 - Status
 - Authority
 - Owner
-- Creation Date
+- Classification
+- Created Date
 - Last Updated
 - Related Artifacts
 
-Additional metadata may be defined according to the artifact type.
+Additional metadata may be introduced by specialized artifact types.
 
 ---
 
 # Artifact Relationships
 
-Artifacts are connected through traceable engineering relationships.
+Artifacts are connected through explicit engineering relationships.
 
-A typical relationship chain is:
+A typical engineering chain is:
 
 ```text
 Vision
       ↓
+Mission
+      ↓
 Requirements
       ↓
-Specification
+Policies
+      ↓
+Specifications
       ↓
 Architecture
-      ↓
-Design
       ↓
 Implementation
       ↓
@@ -262,28 +286,30 @@ Release
 Knowledge
 ```
 
-Every relationship should be intentional, documented, and traceable.
+Every relationship should remain explicit and traceable.
 
 ---
 
 # Traceability
 
-Every artifact should answer the following questions:
+Every artifact should answer:
 
 - Why does it exist?
-- What problem does it solve?
-- Which artifact originated it?
-- Which artifacts depend on it?
-- How is it validated?
-- Which version is currently authoritative?
+- Which mission supports it?
+- Which policies govern it?
+- Which specifications define it?
+- Which implementation realizes it?
+- Which validation confirms it?
+- Which knowledge was produced?
+- Which future artifacts depend on it?
 
-Traceability is mandatory for engineering governance.
+Traceability is mandatory for OSEF compliance.
 
 ---
 
 # Artifact Lifecycle
 
-Artifacts evolve through a common lifecycle.
+Artifacts typically evolve through the following lifecycle.
 
 ```text
 Draft
@@ -303,49 +329,72 @@ Deprecated
 Archived
 ```
 
-Not every artifact will traverse every state, but every artifact should have a defined lifecycle.
+Not every artifact will traverse every state, but every artifact should define its lifecycle.
 
 ---
 
 # Engineering Rules
 
-Artifacts should comply with the following rules:
+Every artifact shall:
 
-- Every artifact shall have a defined purpose.
-- Every artifact shall have an identified owner.
-- Every significant change shall be versioned.
-- Every architectural decision shall be documented.
-- Every implementation shall trace to one or more specifications.
-- Every implementation shall be validated.
-- Every significant lesson learned shall be preserved.
-- Every artifact shall remain discoverable.
+- have a clearly defined purpose;
+- have an identified owner;
+- be version controlled;
+- maintain traceability;
+- comply with applicable policies;
+- reference governing specifications;
+- preserve engineering knowledge;
+- remain discoverable.
 
 ---
 
-# Artifact Quality
+# Quality
 
-The quality of an Intelligent Operating System depends on both the quality of its artifacts and the quality of the relationships between them.
+Artifact quality depends on both the artifact itself and its relationships.
 
-Missing documentation, broken traceability, obsolete specifications, or undocumented decisions should be treated as engineering defects.
+Engineering defects include:
+
+- missing documentation;
+- obsolete specifications;
+- broken traceability;
+- undocumented decisions;
+- orphan artifacts;
+- inconsistent metadata.
+
+Artifacts should therefore be periodically reviewed as part of engineering governance.
 
 ---
 
 # Extensibility
 
-The Artifact Model is designed to evolve.
+The Artifact Model is intentionally extensible.
 
 New artifact types may be introduced provided they:
 
-- Define a clear engineering purpose.
-- Follow the common metadata structure.
-- Integrate with the traceability model.
-- Comply with governance requirements.
-- Preserve compatibility with the OSEF engineering philosophy.
+- represent a distinct engineering concept;
+- define a clear purpose;
+- follow the common metadata model;
+- integrate with traceability;
+- comply with governance policies;
+- remain consistent with the OSEF Meta Model.
+
+---
+
+# Compliance
+
+An OSEF implementation is artifact-compliant when:
+
+- engineering work is represented through explicit artifacts;
+- artifacts maintain traceability;
+- required metadata is present;
+- lifecycle states are respected;
+- relationships remain consistent;
+- governance policies are followed.
 
 ---
 
 # Conclusion
 
-The Artifact Model establishes the common language for representing engineering knowledge within OSEF.
+The Artifact Model establishes the engineering representation layer of OSEF.
 
-By treating artifacts as first-class engineering assets, OSEF enables disciplined development, transparent governance, effective knowledge preservation, and sustainable evolution across every Intelligent Operating System built using the framework.
+By treating artifacts as first-class engineering assets, OSEF enables transparent governance, end-to-end traceability, knowledge preservation, automation, and sustainable evolution across every Intelligent Operating System built with the framework.

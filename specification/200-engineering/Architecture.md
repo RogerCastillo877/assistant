@@ -1,141 +1,147 @@
 ---
 Document ID: OSEF-ARC-001
 Title: Architecture
-Version: 0.1.0
+Version: 0.2.0
 Status: Draft
 Authority: Normative
 Owner: OSEF Architecture Board
 Classification: Public
 Created: 2026-07-26
-Last Updated: 2026-07-26
+Last Updated: 2026-07-27
 Next Review: TBD
+
 Related Documents:
-  - OSEF-MAN-001
-  - OSEF-VIS-001
-  - OSEF-CPR-001
-  - OSEF-GOV-001
-  - OSEF-SDL-001
-  - OSEF-MTM-001
-  - OSEF-ATM-001
-  - OSEF-BLU-001
+
+- OSEF-SPE-101
+- OSEF-SPE-105
+- OSEF-SPE-106
+- OSEF-SPE-107
+- OSEF-SPE-108
+- OSEF-SPE-109
+- OSEF-SPE-110
+- OSEF-SPE-111
+- OSEF-SPE-112
+- OSEF-SPE-113
+- OSEF-SPE-114
+- OSEF-SPE-115
+- OSEF-SPE-116
+- OSEF-SPE-117
+- OSEF-MTM-001
+- OSEF-ATM-001
+- OSEF-SDL-001
+
 ---
 
 # Architecture
 
-## Purpose
+## 1. Purpose
 
-OSEF provides a reference architectural framework for designing, building, validating, and evolving Intelligent Operating Systems.
+The OSEF Architecture defines the reference architectural model for designing, implementing, validating, operating, and evolving Intelligent Operating Systems.
 
-Rather than prescribing a single implementation or technology stack, OSEF defines the architectural principles, logical layers, engineering boundaries, and dependency rules that every OSEF-compliant system should follow.
+Rather than prescribing a specific technology stack, OSEF defines the engineering structure that enables systems to remain modular, explainable, governable, reusable, and continuously evolvable.
 
-The architecture is intentionally technology-agnostic and is designed to support continuous evolution while preserving maintainability, explainability, and engineering discipline.
+This architecture is technology independent.
+
+It specifies engineering responsibilities rather than implementation details.
 
 ---
 
-# Architectural Objectives
+# 2. Architectural Objectives
 
 The OSEF Architecture aims to:
 
-- Establish a consistent engineering structure.
-- Promote modular and reusable components.
-- Encourage low coupling and high cohesion.
-- Enable continuous system evolution.
-- Preserve architectural traceability.
-- Support AI-assisted engineering under human governance.
-- Facilitate knowledge reuse across multiple implementations.
+- establish a consistent engineering structure;
+- maximize reuse;
+- minimize coupling;
+- improve maintainability;
+- preserve traceability;
+- enable AI-assisted engineering;
+- support governance by design;
+- facilitate continuous learning.
 
 ---
 
-# Architectural Principles
+# 3. Architectural Principles
 
-Every OSEF implementation should comply with the following principles.
+Every OSEF implementation shall follow these principles.
+
+## Specification First
+
+Specifications are the authoritative source of truth.
+
+Implementation follows specification.
+
+---
 
 ## Separation of Concerns
 
-Each architectural component is responsible for a single well-defined concern.
-
-Responsibilities should remain clearly separated throughout the system.
+Every architectural element owns a single engineering responsibility.
 
 ---
 
-## Layered Architecture
+## Layered Responsibility
 
-The system is organized into logical layers.
+Higher layers coordinate.
 
-Each layer provides services to the layer above while depending only on the layer immediately below.
+Lower layers execute.
 
----
-
-## Reusability
-
-Engineering assets should be designed for reuse whenever possible.
-
-Reusable components reduce complexity and improve consistency across implementations.
+Responsibilities must not overlap.
 
 ---
 
-## Loose Coupling
+## Reuse Before Creation
 
-Dependencies between components should be minimized.
-
-Architectural boundaries should remain stable as the system evolves.
-
----
-
-## High Cohesion
-
-Closely related responsibilities should remain together.
-
-Each component should represent a coherent engineering concept.
+Existing engineering assets should always be reused before new ones are created.
 
 ---
 
 ## Explainability
 
-Architectural decisions should be understandable and justifiable.
-
-The behavior of the system should remain explainable to both engineers and stakeholders.
+Every architectural decision should be understandable.
 
 ---
 
-## Human Oversight
+## Traceability
 
-Critical engineering decisions remain under human responsibility.
-
-Artificial Intelligence assists engineering but never replaces accountability.
+Every artifact shall remain traceable throughout its lifecycle.
 
 ---
 
-# Architectural Layers
+## Human Accountability
 
-OSEF distinguishes between two complementary architectural perspectives:
+Artificial Intelligence assists engineering.
 
-1. Framework Architecture
-2. Runtime Architecture
+Humans remain accountable.
 
 ---
 
-# Framework Architecture
+# 4. Framework Architecture
 
-The framework itself is organized into five logical layers.
+OSEF itself is organized into six architectural layers.
 
-```
-Vision
+```text
+Foundation
         ↓
-Governance
+Core Specifications
         ↓
 Engineering
         ↓
 Runtime
         ↓
-Implementation
+Reference Implementations
+        ↓
+Examples
 ```
 
-## Vision
+Each layer builds upon the previous one.
 
-Defines the purpose and long-term direction of OSEF.
+---
 
-Includes:
+## Foundation
+
+Defines why OSEF exists.
+
+Examples:
 
 - Manifesto
 - Vision
@@ -144,326 +150,381 @@ Includes:
 
 ---
 
-## Governance
+## Core Specifications
 
-Defines how engineering decisions are made.
+Defines the normative engineering model.
 
-Includes:
+Examples:
 
-- Governance
-- RFC Process
-- Documentation Standards
-- Decision Records
+- OSEF Specification
+- Governance Specification
+- Workflow Specification
+- Capability Specification
+- Skill Specification
+- Tool Specification
+- Memory Specification
+- Policy Specification
 
 ---
 
 ## Engineering
 
-Defines the engineering methodology.
+Defines how systems are engineered.
 
-Includes:
+Examples:
 
 - Architecture
 - SDLC
 - Meta Model
 - Artifact Model
+- Standards
 - Glossary
 
 ---
 
 ## Runtime
 
-Defines executable framework assets.
+Contains executable framework assets.
 
-Examples include:
+Examples:
 
-- Configuration
 - Schemas
 - Templates
-- Validators
-- CLI
-
----
-
-## Implementation
-
-Represents systems developed using OSEF.
-
-Examples:
-
-- Personal OS
-- Marketing OS
-
-Additional implementations may target any domain while following the same engineering foundation.
-
----
-
-# Runtime Architecture
-
-Every Intelligent Operating System developed with OSEF should follow the following logical architecture.
-
-```
-Mission
-        ↓
-Domain
-        ↓
-Agent
-        ↓
-Workflow
-        ↓
-Capability
-        ↓
-Skill
-        ↓
-Tool
-        ↓
-Infrastructure
-```
-
----
-
-# Runtime Layer Descriptions
-
-## Mission Layer
-
-Represents the objectives that drive the system.
-
-Examples:
-
-- Find a new job
-- Improve personal finances
-- Learn a new subject
-
-Missions define *why* the system exists.
-
----
-
-## Domain Layer
-
-Represents an independent business or personal domain.
-
-Examples:
-
-- Personal OS
-- Marketing OS
-- Health OS
-
-Domains remain functionally independent while sharing common engineering principles.
-
----
-
-## Agent Layer
-
-Agents coordinate engineering activities.
-
-Typical responsibilities include:
-
-- Interpret objectives
-- Maintain execution context
-- Select workflows
-- Coordinate capabilities
-- Evaluate results
-- Request human validation when required
-
-Agents orchestrate work but do not directly implement business logic.
-
----
-
-## Workflow Layer
-
-Workflows coordinate complete processes.
-
-A workflow combines multiple capabilities to accomplish a specific objective.
-
-Workflows define orchestration rather than implementation.
-
----
-
-## Capability Layer
-
-Capabilities represent high-level business functions.
-
-Examples:
-
-- Learn a topic
-- Analyze finances
-- Search for employment
-
-Capabilities coordinate multiple skills to deliver meaningful outcomes.
-
----
-
-## Skill Layer
-
-Skills implement specialized tasks.
-
-Examples:
-
-- Search information
-- Validate sources
-- Summarize documents
-- Categorize expenses
-
-Each skill should have a single responsibility and remain independently reusable.
-
----
-
-## Tool Layer
-
-Tools provide access to external or internal technical services.
-
-Examples include:
-
-- AI models
-- External APIs
-- Databases
-- Search engines
-- Internal platform services
-
-Tools execute operations but never make engineering decisions.
-
----
-
-## Infrastructure Layer
-
-Provides common technical services.
-
-Typical responsibilities include:
-
 - Configuration
-- Logging
-- Persistence
-- Security
-- Monitoring
-- Observability
-- Messaging
-
-Infrastructure supports every other layer while remaining independent from business logic.
+- Validators
 
 ---
 
-# Shared Engineering Assets
+## Reference Implementations
 
-The following assets may be reused across domains:
+Validate OSEF using complete Intelligent Operating Systems.
 
-- Skills
-- Capabilities
-- Workflows
-- Templates
-- Standards
-- Specifications
-- Prompts
-- Knowledge Repositories
+Examples:
 
-Reusable engineering assets are fundamental to the OSEF philosophy.
+- Personal OS
+- Marketing OS
 
 ---
 
-# Dependency Rules
+## Examples
 
-OSEF follows strict dependency rules.
+Illustrate engineering practices without defining normative behavior.
 
-```
+---
+
+# 5. Runtime Architecture
+
+Every Intelligent Operating System follows the same execution architecture.
+
+```text
 Mission
-    ↓
-Domain
-    ↓
+      ↓
 Agent
-    ↓
+      ↓
 Workflow
-    ↓
+      ↓
 Capability
-    ↓
+      ↓
 Skill
-    ↓
+      ↓
 Tool
-    ↓
-Infrastructure
+      ↓
+Resource
 ```
 
-Dependencies may only point downward.
+Responsibilities flow downward.
 
-Reverse dependencies are prohibited unless introduced through explicit abstractions.
-
-These rules preserve architectural stability and minimize coupling.
+Execution flows upward through produced results.
 
 ---
 
-# Knowledge Flow
+# 6. Cross-Cutting Architecture
 
-Knowledge is generated continuously throughout the engineering lifecycle.
+Several engineering concepts apply to every architectural layer.
 
-```
-Experience
-        ↓
+```text
+Policy
+
+Governance
+
+Quality
+
+Security
+
+Memory
+
 Knowledge
-        ↓
-Specification
-        ↓
-Implementation
-        ↓
-Validation
-        ↓
-Experience
+
+Traceability
+
+Compliance
 ```
 
-Knowledge is treated as a first-class engineering artifact.
+These concepts constrain or enrich execution.
+
+They are not execution layers.
 
 ---
 
-# Evolution Strategy
+# 7. Runtime Layer Responsibilities
 
-The architecture is designed to evolve incrementally.
+## Mission
 
-New domains, capabilities, skills, tools, and engineering assets may be incorporated without modifying the overall architectural structure.
+Defines strategic objectives.
 
-Architectural evolution should always preserve:
+Examples:
 
-- Stability
-- Traceability
-- Reusability
-- Explainability
-- Governance
-
-Major architectural changes should be proposed and reviewed through the OSEF RFC process.
+- Learn AI
+- Recover financial stability
+- Launch a marketing campaign
 
 ---
 
-# Architectural Decision Principles
+## Agent
 
-Architectural decisions should always prioritize:
+Coordinates execution.
+
+Responsibilities include:
+
+- planning;
+- reasoning;
+- orchestration;
+- delegation;
+- supervision.
+
+Agents coordinate.
+
+Agents do not execute implementation logic.
+
+---
+
+## Workflow
+
+Coordinates complete business processes.
+
+Workflows orchestrate Capabilities.
+
+---
+
+## Capability
+
+Provides reusable functional behavior.
+
+Capabilities coordinate Skills.
+
+---
+
+## Skill
+
+Implements one reusable responsibility.
+
+Skills should remain independent.
+
+---
+
+## Tool
+
+Provides execution mechanisms.
+
+Examples:
+
+- LLM
+- Search Engine
+- API
+- Database
+- Browser
+
+Tools execute.
+
+They never make engineering decisions.
+
+---
+
+## Resource
+
+Represents assets consumed during execution.
+
+Examples:
+
+- Files
+- Models
+- Documents
+- Configuration
+- Credentials
+
+---
+
+# 8. Dependency Rules
+
+Dependencies shall always point downward.
+
+```text
+Mission
+      ↓
+Agent
+      ↓
+Workflow
+      ↓
+Capability
+      ↓
+Skill
+      ↓
+Tool
+      ↓
+Resource
+```
+
+Reverse dependencies are prohibited.
+
+Cross-layer access should occur only through defined abstractions.
+
+---
+
+# 9. Knowledge Architecture
+
+Knowledge continuously evolves.
+
+```text
+Execution
+      ↓
+Memory
+      ↓
+Knowledge
+      ↓
+Best Practice
+      ↓
+Standard
+      ↓
+Specification
+```
+
+Memory preserves context.
+
+Knowledge preserves validated engineering experience.
+
+Specifications institutionalize knowledge.
+
+---
+
+# 10. Governance Architecture
+
+Governance controls engineering evolution.
+
+```text
+Policy
+      ↓
+Governance
+      ↓
+Validation
+      ↓
+Compliance
+      ↓
+Release
+```
+
+Governance is independent of runtime execution.
+
+---
+
+# 11. Traceability Architecture
+
+Every engineering artifact shall remain connected.
+
+```text
+Vision
+      ↓
+Mission
+      ↓
+Requirement
+      ↓
+Specification
+      ↓
+Architecture
+      ↓
+Implementation
+      ↓
+Validation
+      ↓
+Release
+      ↓
+Knowledge
+```
+
+Traceability enables:
+
+- auditing;
+- explainability;
+- maintenance;
+- continuous improvement.
+
+---
+
+# 12. Shared Engineering Assets
+
+Reusable assets include:
+
+- Workflows
+- Capabilities
+- Skills
+- Policies
+- Templates
+- Specifications
+- Standards
+- Prompts
+- Knowledge Bases
+
+Engineering assets should remain implementation independent whenever possible.
+
+---
+
+# 13. Evolution Strategy
+
+OSEF is designed for incremental evolution.
+
+New entities may be introduced provided they:
+
+- preserve architectural consistency;
+- maintain traceability;
+- remain specification-driven;
+- avoid unnecessary coupling.
+
+Major architectural changes shall be introduced through the Governance process.
+
+---
+
+# 14. Architectural Decision Principles
+
+Architectural decisions should prioritize:
 
 1. Simplicity
 2. Reusability
 3. Traceability
 4. Explainability
-5. Long-term evolution
-6. Human governance
-
-These priorities should guide every significant architectural decision within OSEF.
+5. Long-term maintainability
+6. Governance
+7. Human accountability
 
 ---
 
-# Expected Benefits
+# 15. Expected Benefits
 
 The OSEF Architecture enables:
 
-- Independent domain evolution.
-- Reusable engineering assets.
-- Clear architectural boundaries.
-- End-to-end traceability.
-- AI-assisted engineering.
-- Continuous validation.
-- Knowledge reuse across implementations.
-- Long-term maintainability.
-- Sustainable system evolution.
+- modular Intelligent Operating Systems;
+- reusable engineering assets;
+- governed AI systems;
+- continuous learning;
+- end-to-end traceability;
+- specification-driven development;
+- explainable automation;
+- sustainable long-term evolution.
 
 ---
 
-# Conclusion
+# 16. Conclusion
 
-The OSEF Architecture establishes the engineering foundation upon which Intelligent Operating Systems are designed and evolved.
+The OSEF Architecture defines the stable engineering structure that supports every Intelligent Operating System built with OSEF.
 
-By defining stable architectural principles, logical layers, dependency rules, and governance boundaries, OSEF enables systems to grow in complexity without sacrificing clarity, maintainability, or engineering discipline.
+By separating execution from governance, specifications from implementation, and knowledge from memory, OSEF enables intelligent systems to evolve without sacrificing clarity, consistency, or engineering discipline.
 
-The architecture is intended to remain stable while implementations, technologies, and engineering practices continue to evolve.
+The architecture is intentionally stable, allowing technologies, tools, and implementation strategies to evolve while preserving the engineering foundation of the framework.
