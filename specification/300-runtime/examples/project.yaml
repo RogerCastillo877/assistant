@@ -1,0 +1,80 @@
+osef:
+  specification: "0.1.0"
+  framework: "Operating Systems Engineering Framework"
+  maturity: "Foundation"
+  profile: "default"
+
+project:
+  id: "personal-os"
+  name: "Personal OS"
+  description: "Reference implementation of an OSEF project."
+  version: "0.1.0"
+  status: "draft"
+  type: "reference-implementation"
+
+organization:
+  owner: "Rocas"
+
+lifecycle:
+  sdlc: "OSEF-SDL-001"
+  governance: "OSEF-GOV-001"
+  architecture: "OSEF-ARC-001"
+
+specifications:
+  manifesto: "OSEF-MAN-001"
+  vision: "OSEF-VIS-001"
+  principles: "OSEF-CPR-001"
+  blueprint: "OSEF-BLU-001"
+  roadmap: "OSEF-RDM-001"
+  glossary: "OSEF-GLS-001"
+  metamodel: "OSEF-MTM-001"
+  artifact_model: "OSEF-ATM-001"
+
+missions:
+  - learning
+
+domains:
+  - education
+
+artifacts:
+  root: "./docs"
+  specifications: "./docs/specifications"
+  adr: "./docs/adr"
+  rfc: "./docs/rfc"
+  decisions: "./docs/decisions"
+
+knowledge:
+  root: "./knowledge"
+  memory: "./knowledge/memory"
+  lessons: "./knowledge/lessons"
+  patterns: "./knowledge/patterns"
+
+templates:
+  root: "./templates"
+
+schemas:
+  root: "./schemas"
+
+automation:
+  validators: true
+  templates: true
+  documentation: true
+
+quality:
+  semantic_versioning: true
+  traceability: "required"
+  documentation_required: true
+  architecture_review: "required"
+
+runtime:
+  engine: "osef-runtime"
+  memory: true
+  policy_enforcement: true
+  validation: true
+
+reference_implementations:
+  - "Personal OS"
+
+future:
+  planned:
+    - "Marketing OS"

@@ -1,0 +1,28 @@
+id: tool-id
+
+name: Tool Name
+
+description: >
+  Tool description.
+
+type: api
+
+owner: Team
+
+version: 1.0.0
+
+status: active
+
+endpoint:
+
+authentication:
+
+inputs: []
+
+outputs: []
+
+capabilities: []
+
+resources: []
+
+policies: []

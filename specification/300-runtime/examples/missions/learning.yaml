@@ -1,0 +1,49 @@
+id: learning
+
+name: Learning Mission
+
+purpose: Accelerate learning through reusable engineering workflows.
+
+description: >
+  Reference mission demonstrating how OSEF models a complete mission
+  from planning through knowledge generation.
+
+version: "0.1.0"
+
+status: active
+
+priority: high
+
+owner: Rocas
+
+domain: education
+
+workflows:
+  - learning-workflow
+
+policies:
+  - default-governance
+
+requirements:
+  - internet-access
+  - human-feedback
+
+success_criteria:
+  - learning-objective-completed
+  - reusable-knowledge-generated
+
+metrics:
+  completion_rate: 100
+  quality_score: 90
+
+knowledge_outputs:
+  - search-best-practices
+
+memory: true
+
+human_approval: false
+
+tags:
+  - runtime
+  - example
+  - learning

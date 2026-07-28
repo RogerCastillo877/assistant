@@ -1,0 +1,47 @@
+metadata:
+  DocumentID: OSEF-TOL-001
+  Title: Web Search Tool
+  Version: 1.0.0
+  Status: Approved
+  Authority: Normative
+  Owner: OSEF Foundation
+  Classification: Public
+  Created: 2026-07-27
+  LastUpdated: 2026-07-27
+
+tool:
+  id: web-search
+
+  name: Web Search
+
+  description: >
+    Searches trusted external sources to retrieve information
+    required by OSEF skills.
+
+  type: search
+
+  owner: OSEF Foundation
+
+  version: 1.0.0
+
+  status: active
+
+  endpoint: https://example.search.api
+
+  authentication: api-key
+
+  inputs:
+    - query
+
+  outputs:
+    - search-results
+
+  capabilities:
+    - planning
+
+  resources:
+    - knowledge-base
+
+  policies:
+    - security-policy
+    - knowledge-policy

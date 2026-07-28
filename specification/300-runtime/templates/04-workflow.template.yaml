@@ -1,0 +1,63 @@
+metadata:
+
+  DocumentID: OSEF-WKF-001
+  Title: Workflow Template
+  Version: 1.0.0
+  Status: Draft
+  Authority: Normative
+  Owner: OSEF
+  Classification: Public
+  Created: 2026-07-27
+  LastUpdated: 2026-07-27
+
+workflow:
+
+  id: planning-workflow
+
+  name: Planning Workflow
+
+  description: Standard planning workflow.
+
+  purpose: Transform a mission into executable tasks.
+
+  version: 1.0.0
+
+  status: active
+
+  mission: mission-id
+
+  agent: planner-agent
+
+  policies:
+    - governance-policy
+
+  inputs:
+    - mission
+
+  outputs:
+    - execution-plan
+
+  triggers:
+    - manual
+
+  steps:
+
+    - id: analyze
+
+      name: Analyze Mission
+
+      capability: planning
+
+    - id: decompose
+
+      name: Decompose Tasks
+
+      capability: decomposition
+
+  metrics:
+
+    - execution-time
+
+  tags:
+
+    - planning

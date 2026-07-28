@@ -1,0 +1,29 @@
+id: memory-id
+
+name: Memory Name
+
+description: >
+  Describe the memory.
+
+purpose: >
+  Purpose of this memory.
+
+type: semantic
+
+scope: project
+
+retention: persistent
+
+owner: Team
+
+storage:
+
+encryption: false
+
+classification: internal
+
+policies: []
+
+sources: []
+
+consumers: []

@@ -1,0 +1,48 @@
+metadata:
+
+  DocumentID: OSEF-POL-001
+  Title: Policy Template
+  Version: 1.0.0
+  Status: Draft
+  Authority: Normative
+  Owner: OSEF
+  Classification: Public
+  Created: 2026-07-27
+  LastUpdated: 2026-07-27
+
+policy:
+
+  id: governance-policy
+
+  name: Governance Policy
+
+  description: Default governance rules.
+
+  type: governance
+
+  version: 1.0.0
+
+  status: active
+
+  effect: require
+
+  scope:
+
+    - workflow
+    - mission
+
+  priority: 50
+
+  rules:
+
+    - Every workflow must declare an owner.
+
+    - Every mission must define success criteria.
+
+  requires_human_approval: false
+
+  audit: true
+
+  tags:
+
+    - governance

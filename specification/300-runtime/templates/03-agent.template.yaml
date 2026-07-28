@@ -1,0 +1,48 @@
+metadata:
+
+  DocumentID: OSEF-AGT-001
+  Title: Agent Template
+  Version: 1.0.0
+  Status: Draft
+  Authority: Normative
+  Owner: OSEF
+  Classification: Public
+  Created: 2026-07-27
+  LastUpdated: 2026-07-27
+
+agent:
+
+  id: planner-agent
+
+  name: Planner Agent
+
+  description: Responsible for planning missions and coordinating workflows.
+
+  version: 1.0.0
+
+  status: active
+
+  type: planner
+
+  mission: mission-id
+
+  capabilities:
+    - planning
+    - decomposition
+
+  workflows:
+    - planning-workflow
+
+  policies:
+    - governance-policy
+
+  memory: true
+
+  knowledge: true
+
+  human_approval: false
+
+  runtime: default-runtime
+
+  tags:
+    - planning

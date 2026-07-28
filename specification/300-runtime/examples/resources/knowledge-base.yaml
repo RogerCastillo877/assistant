@@ -1,0 +1,55 @@
+metadata:
+  DocumentID: OSEF-RES-001
+  Title: Knowledge Base Resource
+  Version: 1.0.0
+  Status: Approved
+  Authority: Normative
+  Owner: OSEF Foundation
+  Classification: Public
+  Created: 2026-07-27
+  LastUpdated: 2026-07-27
+
+resource:
+
+  id: knowledge-base
+
+  name: Knowledge Base
+
+  description: >
+    Central repository containing reusable engineering knowledge,
+    patterns, lessons learned and documentation.
+
+  type: knowledge-base
+
+  owner: OSEF Foundation
+
+  classification: public
+
+  location: ./knowledge
+
+  provider: local
+
+  format: markdown
+
+  access:
+
+    authentication: none
+
+    authorization: public
+
+    encryption: false
+
+  lifecycle: active
+
+  dependencies: []
+
+  used_by:
+    - web-search
+    - search
+
+  version: 1.0.0
+
+  tags:
+    - knowledge
+    - repository
+    - runtime

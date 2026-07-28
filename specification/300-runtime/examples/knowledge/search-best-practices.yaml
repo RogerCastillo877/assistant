@@ -1,0 +1,56 @@
+metadata:
+  DocumentID: OSEF-KNW-001
+  Title: Search Best Practices
+  Version: 1.0.0
+  Status: Approved
+  Authority: Normative
+  Owner: OSEF Foundation
+  Classification: Public
+  Created: 2026-07-27
+  LastUpdated: 2026-07-27
+
+knowledge:
+
+  id: search-best-practices
+
+  name: Search Best Practices
+
+  description: >
+    Collection of engineering best practices for performing
+    reliable information retrieval within OSEF.
+
+  category: best-practice
+
+  status: approved
+
+  source: OSEF Foundation
+
+  owner: OSEF Foundation
+
+  version: 1.0.0
+
+  tags:
+    - search
+    - retrieval
+    - best-practice
+
+  references:
+    - web-search
+    - semantic-memory
+
+  related_capabilities:
+    - planning
+
+  related_skills:
+    - search
+
+  related_workflows:
+    - learning-workflow
+
+  validation:
+
+    validated: true
+
+    validated_by: validator
+
+    validation_date: 2026-07-27

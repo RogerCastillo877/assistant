@@ -1,0 +1,37 @@
+id: planner
+
+name: Planning Agent
+
+description: >
+  Reference agent responsible for planning and coordinating
+  learning activities inside the OSEF runtime.
+
+version: "0.1.0"
+
+status: active
+
+type: planner
+
+mission: learning
+
+policies:
+  - default-governance
+
+workflows:
+  - learning-workflow
+
+capabilities:
+  - planning
+
+memory: true
+
+knowledge: true
+
+human_approval: false
+
+runtime: default-runtime
+
+tags:
+  - runtime
+  - planner
+  - example

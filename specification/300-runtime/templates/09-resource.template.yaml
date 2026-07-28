@@ -1,0 +1,36 @@
+id: resource-id
+
+name: Resource Name
+
+description: >
+  Describe the resource.
+
+type: configuration
+
+owner: Team
+
+classification: internal
+
+location:
+
+provider:
+
+format:
+
+access:
+
+  authentication:
+
+  authorization:
+
+  encryption: false
+
+lifecycle: active
+
+dependencies: []
+
+used_by: []
+
+version: 1.0.0
+
+tags: []

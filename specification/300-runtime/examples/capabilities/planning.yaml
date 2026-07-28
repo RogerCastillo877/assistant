@@ -1,0 +1,62 @@
+metadata:
+
+  DocumentID: OSEF-CAP-001
+  Title: Planning Capability
+  Version: 0.1.0
+  Status: Approved
+  Authority: Normative
+  Owner: OSEF
+  Classification: Public
+  Created: 2026-07-28
+  LastUpdated: 2026-07-28
+
+capability:
+
+  id: planning
+
+  name: Planning Capability
+
+  description: >
+    Coordinates the planning process required to execute
+    a learning mission.
+
+  purpose: >
+    Transform a learning objective into an executable plan.
+
+  version: "0.1.0"
+
+  status: approved
+
+  owner: OSEF
+
+  inputs:
+    - learning-goal
+
+  outputs:
+    - execution-plan
+
+  preconditions:
+    - mission-defined
+
+  postconditions:
+    - execution-plan-created
+
+  policies:
+    - default-governance
+
+  required_tools: []
+
+  required_resources:
+    - knowledge-base
+
+  skills:
+    - search
+
+  metrics:
+    - planning-time
+    - planning-quality
+
+  tags:
+    - planning
+    - capability
+    - learning

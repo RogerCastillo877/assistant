@@ -1,0 +1,48 @@
+metadata:
+  DocumentID: OSEF-MEM-001
+  Title: Semantic Memory
+  Version: 1.0.0
+  Status: Approved
+  Authority: Normative
+  Owner: OSEF Foundation
+  Classification: Public
+  Created: 2026-07-27
+  LastUpdated: 2026-07-27
+
+memory:
+
+  id: semantic-memory
+
+  name: Semantic Memory
+
+  description: >
+    Persistent memory storing reusable knowledge,
+    engineering concepts, patterns and relationships.
+
+  purpose: >
+    Provide long-term knowledge shared across
+    missions, workflows and agents.
+
+  type: semantic
+
+  scope: project
+
+  retention: persistent
+
+  owner: OSEF Foundation
+
+  storage: ./knowledge
+
+  encryption: false
+
+  classification: public
+
+  policies:
+    - knowledge-policy
+
+  sources:
+    - knowledge-base
+
+  consumers:
+    - search
+    - web-search

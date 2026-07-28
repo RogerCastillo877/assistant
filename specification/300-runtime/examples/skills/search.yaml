@@ -1,0 +1,57 @@
+metadata:
+  DocumentID: OSEF-SKL-001
+  Title: Search Skill
+  Version: 1.0.0
+  Status: Approved
+  Authority: Normative
+  Owner: OSEF Foundation
+  Classification: Public
+  Created: 2026-07-27
+  LastUpdated: 2026-07-27
+
+skill:
+  id: search
+  name: Search
+  description: Performs information retrieval from authorized sources.
+  purpose: Obtain reliable information required by a capability.
+
+  owner: OSEF Foundation
+  status: approved
+
+  inputs:
+    - query
+
+  outputs:
+    - search-results
+
+  tools:
+    - web-search
+
+  resources:
+    - knowledge-base
+
+  memory:
+    - semantic-memory
+
+  policies:
+    - security-policy
+    - knowledge-policy
+
+  constraints:
+    - use-authorized-sources
+    - preserve-traceability
+
+  preconditions:
+    - query-provided
+
+  postconditions:
+    - results-available
+
+  metrics:
+    - response-time
+    - relevance-score
+
+  tags:
+    - search
+    - retrieval
+    - knowledge

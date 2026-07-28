@@ -1,0 +1,38 @@
+id: capability-id
+
+name: Capability Name
+
+description: >
+  Describe what this capability provides.
+
+purpose: >
+  Why this capability exists.
+
+version: 1.0.0
+
+status: draft
+
+owner: Team
+
+inputs:
+  - input
+
+outputs:
+  - output
+
+preconditions: []
+
+postconditions: []
+
+policies: []
+
+required_tools: []
+
+required_resources: []
+
+skills:
+  - skill-id
+
+metrics: []
+
+tags: []

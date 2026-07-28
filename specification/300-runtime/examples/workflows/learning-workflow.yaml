@@ -1,0 +1,62 @@
+id: learning-workflow
+
+name: Learning Workflow
+
+description: >
+  Reference workflow showing how an OSEF agent executes a learning
+  process from planning to knowledge generation.
+
+purpose: Learn a new topic using reusable engineering practices.
+
+version: "0.1.0"
+
+status: active
+
+mission: learning
+
+policies:
+  - default-governance
+
+agent: planner
+
+inputs:
+  - learning-goal
+
+outputs:
+  - knowledge-asset
+
+triggers:
+  - manual
+  - scheduled
+
+steps:
+
+  - id: planning
+    name: Planning
+    description: Define objectives and execution strategy.
+    capability: planning
+
+  - id: search
+    name: Search Information
+    description: Collect reliable information.
+    capability: planning
+
+  - id: validate
+    name: Validate Information
+    description: Verify quality and consistency.
+    capability: planning
+
+  - id: generate
+    name: Generate Knowledge
+    description: Produce reusable knowledge.
+    capability: planning
+
+metrics:
+  - completion-rate
+  - execution-time
+  - quality-score
+
+tags:
+  - runtime
+  - workflow
+  - learning

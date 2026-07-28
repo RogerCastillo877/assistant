@@ -1,0 +1,34 @@
+id: knowledge-id
+
+name: Knowledge Name
+
+description: >
+  Describe the knowledge asset.
+
+category: lesson
+
+status: draft
+
+source:
+
+owner: Team
+
+version: 1.0.0
+
+tags: []
+
+references: []
+
+related_capabilities: []
+
+related_skills: []
+
+related_workflows: []
+
+validation:
+
+  validated: false
+
+  validated_by:
+
+  validation_date:
