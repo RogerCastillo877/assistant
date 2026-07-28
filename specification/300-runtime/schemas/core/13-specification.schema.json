@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schema/core/13-specification.schema.json",
+  "title": "OSEF Specification",
+  "description": "Schema defining a normative OSEF specification document.",
+  "type": "object",
+  "required": [
+    "metadata",
+    "specification"
+  ],
+  "properties": {
+    "metadata": {
+      "$ref": "./01-metadata.schema.json"
+    },
+    "specification": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "version",
+        "authority",
+        "status",
+        "purpose"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "authority": {
+          "type": "string",
+          "enum": [
+            "Normative",
+            "Informative"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Draft",
+            "Review",
+            "Approved",
+            "Deprecated",
+            "Archived"
+          ]
+        },
+        "purpose": {
+          "type": "string"
+        },
+        "scope": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "related_documents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "applies_to": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "compliance": {
+          "type": "object",
+          "properties": {
+            "mandatory": {
+              "type": "boolean",
+              "default": true
+            },
+            "validation_schema": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

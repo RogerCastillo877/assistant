@@ -1,0 +1,178 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schema/entities/08-skill.schema.json",
+
+  "title": "OSEF Skill Schema",
+  "description": "Defines the structure of an OSEF Skill.",
+
+  "type": "object",
+
+  "required": [
+    "metadata",
+    "skill"
+  ],
+
+  "properties": {
+
+    "metadata": {
+      "$ref": "../core/01-metadata.schema.json"
+    },
+
+    "skill": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "id",
+        "name",
+        "description",
+        "purpose",
+        "version",
+        "owner",
+        "status",
+        "inputs",
+        "outputs",
+        "tools",
+        "resources"
+      ],
+
+      "properties": {
+
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+
+        "name": {
+          "type": "string",
+          "minLength": 3
+        },
+
+        "description": {
+          "type": "string"
+        },
+
+        "purpose": {
+          "type": "string",
+          "minLength": 10
+        },
+
+        "version": {
+          "type": "string"
+        },
+
+        "owner": {
+          "type": "string"
+        },
+
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "review",
+            "approved",
+            "deprecated",
+            "archived"
+          ]
+        },
+
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+
+        "memory": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Optional memory entities read or written by the skill."
+        },
+
+        "policies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true,
+          "description": "Policies governing the execution of the skill."
+        },
+
+        "constraints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+
+        "preconditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+
+        "postconditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+
+      }
+
+    }
+
+  },
+
+  "additionalProperties": false
+}

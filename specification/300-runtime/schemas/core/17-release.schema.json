@@ -1,0 +1,116 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://osef.dev/schema/core/17-release.schema.json",
+"title": "OSEF Release",
+"description": "Defines an official release of an OSEF project or framework.",
+"type": "object",
+"required": [
+"id",
+"name",
+"version",
+"status",
+"release_date",
+"owner"
+],
+"properties": {
+"id": {
+"type": "string",
+"description": "Unique release identifier.",
+"pattern": "^[A-Za-z0-9-]+$"
+},
+"name": {
+"type": "string",
+"minLength": 1
+},
+"version": {
+"type": "string",
+"description": "Semantic version.",
+	"pattern": "^\\d+\\.\\d+\\.\\d+$"
+},
+"status": {
+"type": "string",
+"enum": [
+"Draft",
+"Release Candidate",
+"Released",
+"Deprecated",
+"Archived"
+]
+},
+"release_date": {
+"type": "string",
+"format": "date"
+},
+"owner": {
+"type": "string",
+"minLength": 1
+},
+"description": {
+"type": "string"
+},
+"scope": {
+"type": "string"
+},
+"changes": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"uniqueItems": true,
+"default": []
+},
+"breaking_changes": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"uniqueItems": true,
+"default": []
+},
+"included_artifacts": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"uniqueItems": true,
+"default": []
+},
+"related_decisions": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"uniqueItems": true,
+"default": []
+},
+"validation_results": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"uniqueItems": true,
+"default": []
+},
+"compliance": {
+"type": "object",
+"properties": {
+"osef_version": {
+"type": "string",
+				"pattern": "^\\d+\\.\\d+\\.\\d+$"
+},
+"conformance_level": {
+"type": "string",
+"enum": [
+"Foundation",
+"Core",
+"Extended",
+"Reference"
+]
+}
+},
+"additionalProperties": false,
+"default": {}
+}
+},
+"additionalProperties": false
+}

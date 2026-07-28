@@ -1,0 +1,115 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schemas/01-metadata.schema.json",
+
+  "title": "OSEF Metadata Schema",
+  "description": "Common metadata shared by every OSEF engineering artifact.",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+    "DocumentID",
+    "Title",
+    "Version",
+    "Status",
+    "Authority",
+    "Owner",
+    "Classification",
+    "Created",
+    "LastUpdated"
+  ],
+
+  "properties": {
+
+    "DocumentID": {
+      "type": "string",
+      "pattern": "^OSEF-[A-Z]{3}-\\d{3}$",
+      "description": "Unique identifier of the artifact."
+    },
+
+    "Title": {
+      "type": "string",
+      "minLength": 3
+    },
+
+    "Version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+
+    "Status": {
+      "type": "string",
+      "enum": [
+        "Draft",
+        "Review",
+        "Approved",
+        "Released",
+        "Deprecated",
+        "Archived"
+      ]
+    },
+
+    "Authority": {
+      "type": "string",
+      "enum": [
+        "Normative",
+        "Informative"
+      ]
+    },
+
+    "Owner": {
+      "type": "string"
+    },
+
+    "Classification": {
+      "type": "string",
+      "enum": [
+        "Public",
+        "Internal",
+        "Confidential"
+      ]
+    },
+
+    "Created": {
+      "type": "string",
+      "format": "date"
+    },
+
+    "LastUpdated": {
+      "type": "string",
+      "format": "date"
+    },
+
+    "NextReview": {
+      "type": "string",
+      "format": "date"
+    },
+
+    "RelatedDocuments": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+
+    "Keywords": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+
+    "Tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+
+  }
+}

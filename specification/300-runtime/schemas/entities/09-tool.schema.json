@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schema/entities/09-tool.schema.json",
+
+  "title": "OSEF Tool Schema",
+  "description": "Defines the structure of an OSEF Tool.",
+
+  "type": "object",
+
+  "required": [
+    "metadata",
+    "tool"
+  ],
+
+  "properties": {
+
+    "metadata": {
+      "$ref": "../core/01-metadata.schema.json"
+    },
+
+    "tool": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "id",
+        "name",
+        "type",
+        "description",
+        "owner",
+        "version",
+        "status"
+      ],
+
+      "properties": {
+
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+
+        "name": {
+          "type": "string",
+          "minLength": 3
+        },
+
+        "description": {
+          "type": "string"
+        },
+
+        "type": {
+          "type": "string",
+          "enum": [
+            "api",
+            "llm",
+            "database",
+            "filesystem",
+            "browser",
+            "cli",
+            "runtime",
+            "search",
+            "memory",
+            "custom"
+          ]
+        },
+
+        "owner": {
+          "type": "string"
+        },
+
+        "version": {
+          "type": "string"
+        },
+
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "active",
+            "deprecated",
+            "archived"
+          ]
+        },
+
+        "endpoint": {
+          "type": "string"
+        },
+
+        "authentication": {
+          "type": "string"
+        },
+
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "uniqueItems": true
+        },
+
+        "policies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "uniqueItems": true
+        }
+
+      }
+
+    }
+
+  },
+
+  "additionalProperties": false
+}

@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schema/entities/05-agent.schema.json",
+
+  "title": "OSEF Agent Schema",
+  "description": "Defines the structure of an OSEF Agent.",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+    "id",
+    "name",
+    "version",
+    "status"
+  ],
+
+  "properties": {
+
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique agent identifier."
+    },
+
+    "name": {
+      "type": "string",
+      "minLength": 3
+    },
+
+    "description": {
+      "type": "string"
+    },
+
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "active",
+        "deprecated",
+        "archived"
+      ]
+    },
+
+    "type": {
+      "type": "string",
+      "enum": [
+        "assistant",
+        "planner",
+        "executor",
+        "reviewer",
+        "validator",
+        "supervisor",
+        "specialist",
+        "custom"
+      ],
+      "default": "assistant"
+    },
+
+    "mission": {
+      "type": "string",
+      "description": "Mission coordinated by the agent."
+    },
+
+    "policies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+
+    "memory": {
+      "type": "boolean",
+      "default": true
+    },
+
+    "knowledge": {
+      "type": "boolean",
+      "default": true
+    },
+
+    "human_approval": {
+      "type": "boolean",
+      "default": false
+    },
+
+    "runtime": {
+      "type": "string",
+      "description": "Runtime profile used by the agent."
+    },
+
+    "owner": {
+      "type": "string"
+    },
+
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+
+  }
+
+}

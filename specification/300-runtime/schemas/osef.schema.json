@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schema/runtime/osef.schema.json",
+  "title": "OSEF Project Schema",
+  "description": "Root schema for validating an OSEF project.",
+  "type": "object",
+
+  "properties": {
+
+    "metadata": {
+      "$ref": "core/01-metadata.schema.json"
+    },
+
+    "project": {
+      "$ref": "entities/02-project.schema.json"
+    },
+
+    "missions": {
+      "type": "array",
+      "items": {
+        "$ref": "entities/03-mission.schema.json"
+      },
+      "minItems": 1
+    },
+
+    "policies": {
+      "type": "array",
+      "items": {
+        "$ref": "entities/04-policy.schema.json"
+      }
+    },
+
+    "agents": {
+      "type": "array",
+      "items": {
+        "$ref": "entities/05-agent.schema.json"
+      }
+    },
+
+    "workflows": {
+      "type": "array",
+      "items": {
+        "$ref": "entities/06-workflow.schema.json"
+      }
+    },
+
+    "capabilities": {
+      "type": "array",
+      "items": {
+        "$ref": "entities/07-capability.schema.json"
+      }
+    },
+
+    "skills": {
+      "type": "array",
+      "items": {
+        "$ref": "entities/08-skill.schema.json"
+      }
+    },
+
+    "tools": {
+      "type": "array",
+      "items": {
+        "$ref": "entities/09-tool.schema.json"
+      }
+    },
+
+    "resources": {
+      "type": "array",
+      "items": {
+        "$ref": "entities/10-resource.schema.json"
+      }
+    },
+
+    "memory": {
+      "type": "array",
+      "items": {
+        "$ref": "entities/11-memory.schema.json"
+      }
+    },
+
+    "knowledge": {
+      "type": "array",
+      "items": {
+        "$ref": "entities/12-knowledge.schema.json"
+      }
+    },
+
+    "specifications": {
+      "type": "array",
+      "items": {
+        "$ref": "core/13-specification.schema.json"
+      }
+    },
+
+    "documents": {
+      "type": "array",
+      "items": {
+        "$ref": "core/14-document.schema.json"
+      }
+    },
+
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "$ref": "core/15-artifact.schema.json"
+      }
+    },
+
+    "decisions": {
+      "type": "array",
+      "items": {
+        "$ref": "core/16-decision.schema.json"
+      }
+    },
+
+    "releases": {
+      "type": "array",
+      "items": {
+        "$ref": "core/17-release.schema.json"
+      }
+    },
+
+    "validations": {
+      "type": "array",
+      "items": {
+        "$ref": "core/18-validation.schema.json"
+      }
+    },
+
+    "traceability": {
+      "type": "array",
+      "items": {
+        "$ref": "core/19-traceability.schema.json"
+      }
+    }
+
+  },
+
+  "required": [
+    "metadata",
+    "project",
+    "missions"
+  ],
+
+  "additionalProperties": false
+}

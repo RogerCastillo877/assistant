@@ -1,0 +1,105 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://osef.dev/schema/core/18-validation.schema.json",
+"title": "OSEF Validation",
+"description": "Defines validation results for artifacts, specifications and projects.",
+"type": "object",
+"required": [
+"id",
+"target",
+"validator",
+"status",
+"timestamp"
+],
+"properties": {
+"id": {
+"type": "string",
+"description": "Unique validation identifier.",
+"pattern": "^[A-Za-z0-9-]+$"
+},
+"target": {
+"type": "string",
+"description": "Identifier of the validated artifact."
+},
+"validator": {
+"type": "string",
+"description": "Validator, engine or agent that executed the validation."
+},
+"status": {
+"type": "string",
+"enum": [
+"Passed",
+"PassedWithWarnings",
+"Failed",
+"Skipped"
+]
+},
+"timestamp": {
+"type": "string",
+"format": "date-time"
+},
+"score": {
+"type": "number",
+"minimum": 0,
+"maximum": 100
+},
+"checks": {
+"type": "array",
+"items": {
+"$ref": "#/$defs/check"
+},
+"default": []
+},
+"summary": {
+"type": "string"
+},
+"recommendations": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"default": []
+}
+},
+"$defs": {
+"check": {
+"type": "object",
+"required": [
+"name",
+"result"
+],
+"properties": {
+"name": {
+"type": "string"
+},
+"description": {
+"type": "string"
+},
+"result": {
+"type": "string",
+"enum": [
+"Passed",
+"Warning",
+"Failed",
+"Skipped"
+]
+},
+"severity": {
+"type": "string",
+"enum": [
+"Info",
+"Low",
+"Medium",
+"High",
+"Critical"
+]
+},
+"message": {
+"type": "string"
+}
+},
+"additionalProperties": false
+}
+},
+"additionalProperties": false
+}

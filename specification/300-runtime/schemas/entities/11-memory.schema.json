@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+
+  "$id": "https://osef.dev/schema/entities/11-memory.schema.json",
+
+  "title": "OSEF Memory Schema",
+
+  "description": "Defines the structure of an OSEF Memory component.",
+
+  "type": "object",
+
+  "required": [
+    "metadata",
+    "memory"
+  ],
+
+  "properties": {
+
+    "metadata": {
+      "$ref": "../core/01-metadata.schema.json"
+    },
+
+    "memory": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "id",
+        "name",
+        "type",
+        "scope",
+        "retention",
+        "purpose",
+        "version",
+        "status"
+      ],
+
+      "properties": {
+
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+
+        "name": {
+          "type": "string",
+          "minLength": 3
+        },
+
+        "description": {
+          "type": "string"
+        },
+
+        "purpose": {
+          "type": "string"
+        },
+
+        "version": {
+          "type": "string"
+        },
+
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "active",
+            "deprecated",
+            "archived"
+          ]
+        },
+
+        "type": {
+          "type": "string",
+          "enum": [
+            "working",
+            "episodic",
+            "semantic",
+            "procedural",
+            "long-term",
+            "short-term"
+          ]
+        },
+
+        "scope": {
+          "type": "string",
+          "enum": [
+            "session",
+            "workflow",
+            "agent",
+            "project",
+            "organization",
+            "global"
+          ]
+        },
+
+        "retention": {
+          "type": "string",
+          "enum": [
+            "temporary",
+            "persistent",
+            "archived"
+          ]
+        },
+
+        "owner": {
+          "type": "string"
+        },
+
+        "storage": {
+          "type": "string"
+        },
+
+        "encryption": {
+          "type": "boolean",
+          "default": false
+        },
+
+        "classification": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "restricted"
+          ]
+        },
+
+        "policies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "uniqueItems": true
+        },
+
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "uniqueItems": true
+        }
+
+      }
+
+    }
+
+  },
+
+  "additionalProperties": false
+}

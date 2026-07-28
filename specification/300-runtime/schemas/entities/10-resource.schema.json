@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schema/entities/10-resource.schema.json",
+
+  "title": "OSEF Resource Schema",
+  "description": "Defines the structure of an OSEF Resource.",
+
+  "type": "object",
+
+  "required": [
+    "metadata",
+    "resource"
+  ],
+
+  "properties": {
+
+    "metadata": {
+      "$ref": "../core/01-metadata.schema.json"
+    },
+
+    "resource": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "id",
+        "name",
+        "type",
+        "description",
+        "owner",
+        "classification",
+        "lifecycle",
+        "version"
+      ],
+
+      "properties": {
+
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+
+        "name": {
+          "type": "string",
+          "minLength": 3
+        },
+
+        "description": {
+          "type": "string"
+        },
+
+        "type": {
+          "type": "string",
+          "enum": [
+            "configuration",
+            "dataset",
+            "document",
+            "knowledge-base",
+            "database",
+            "model",
+            "credential",
+            "api-key",
+            "storage",
+            "filesystem",
+            "environment",
+            "cache",
+            "secret",
+            "template",
+            "other"
+          ]
+        },
+
+        "owner": {
+          "type": "string"
+        },
+
+        "classification": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "confidential",
+            "restricted"
+          ]
+        },
+
+        "location": {
+          "type": "string"
+        },
+
+        "provider": {
+          "type": "string"
+        },
+
+        "format": {
+          "type": "string"
+        },
+
+        "access": {
+
+          "type": "object",
+
+          "additionalProperties": false,
+
+          "properties": {
+
+            "authentication": {
+              "type": "string"
+            },
+
+            "authorization": {
+              "type": "string"
+            },
+
+            "encryption": {
+              "type": "boolean"
+            }
+
+          }
+
+        },
+
+        "lifecycle": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "active",
+            "deprecated",
+            "archived"
+          ]
+        },
+
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+
+        "version": {
+          "type": "string"
+        },
+
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        }
+
+      }
+
+    }
+
+  },
+
+  "additionalProperties": false
+}

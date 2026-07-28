@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schema/entities/03-mission.schema.json",
+
+  "title": "OSEF Mission Schema",
+  "description": "Defines the structure of an OSEF Mission.",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+    "id",
+    "name",
+    "purpose",
+    "version",
+    "status"
+  ],
+
+  "properties": {
+
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique mission identifier."
+    },
+
+    "name": {
+      "type": "string",
+      "minLength": 3
+    },
+
+    "purpose": {
+      "type": "string",
+      "minLength": 10
+    },
+
+    "description": {
+      "type": "string"
+    },
+
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "planned",
+        "active",
+        "paused",
+        "completed",
+        "deprecated"
+      ]
+    },
+
+    "priority": {
+      "type": "string",
+      "enum": [
+        "low",
+        "medium",
+        "high",
+        "critical"
+      ]
+    },
+
+    "owner": {
+      "type": "string"
+    },
+
+    "domain": {
+      "type": "string"
+    },
+
+    "workflows": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+
+    "policies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+
+    "requirements": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+
+    "success_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+
+    "metrics": {
+      "type": "object",
+      "additionalProperties": {
+        "type": [
+          "string",
+          "number",
+          "boolean"
+        ]
+      }
+    },
+
+    "knowledge_outputs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+
+    "memory": {
+      "type": "boolean",
+      "default": true
+    },
+
+    "human_approval": {
+      "type": "boolean",
+      "default": false
+    },
+
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+
+  }
+
+}

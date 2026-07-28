@@ -1,0 +1,263 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schema/entities/02-project.schema.json",
+
+  "title": "OSEF Project Descriptor",
+  "description": "Defines the structure of an OSEF project descriptor (osef.yaml).",
+
+  "type": "object",
+
+  "required": [
+    "osef",
+    "project"
+  ],
+
+  "additionalProperties": false,
+
+  "properties": {
+
+    "osef": {
+
+      "type": "object",
+
+      "required": [
+        "specification",
+        "framework",
+        "maturity",
+        "profile"
+      ],
+
+      "additionalProperties": false,
+
+      "properties": {
+
+        "specification": {
+          "type": "string"
+        },
+
+        "framework": {
+          "type": "string"
+        },
+
+        "maturity": {
+          "type": "string",
+          "enum": [
+            "Foundation",
+            "Experimental",
+            "Development",
+            "Production"
+          ]
+        },
+
+        "profile": {
+          "type": "string"
+        }
+
+      }
+
+    },
+
+    "project": {
+
+      "type": "object",
+
+      "required": [
+        "id",
+        "name",
+        "version",
+        "status",
+        "type"
+      ],
+
+      "additionalProperties": false,
+
+      "properties": {
+
+        "id": {
+          "type": "string"
+        },
+
+        "name": {
+          "type": "string"
+        },
+
+        "description": {
+          "type": "string"
+        },
+
+        "version": {
+          "type": "string"
+        },
+
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "review",
+            "approved",
+            "released",
+            "deprecated"
+          ]
+        },
+
+        "type": {
+          "type": "string",
+          "enum": [
+            "reference-implementation",
+            "framework",
+            "application",
+            "library"
+          ]
+        }
+
+      }
+
+    },
+
+    "organization": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "properties": {
+
+        "owner": {
+          "type": "string"
+        }
+
+      }
+
+    },
+
+    "lifecycle": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "properties": {
+
+        "sdlc": {
+          "type": "string"
+        },
+
+        "governance": {
+          "type": "string"
+        },
+
+        "architecture": {
+          "type": "string"
+        }
+
+      }
+
+    },
+
+    "specifications": {
+      "type": "object",
+      "additionalProperties": true
+    },
+
+    "missions": {
+
+      "type": "array",
+
+      "items": {
+        "type": "string"
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "domains": {
+
+      "type": "array",
+
+      "items": {
+        "type": "string"
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": true
+    },
+
+    "knowledge": {
+      "type": "object",
+      "additionalProperties": true
+    },
+
+    "templates": {
+      "type": "object",
+      "additionalProperties": true
+    },
+
+    "schemas": {
+      "type": "object",
+      "additionalProperties": true
+    },
+
+    "automation": {
+      "type": "object",
+      "additionalProperties": true
+    },
+
+    "quality": {
+      "type": "object",
+      "additionalProperties": true
+    },
+
+    "runtime": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "properties": {
+
+        "engine": {
+          "type": "string"
+        },
+
+        "memory": {
+          "type": "boolean"
+        },
+
+        "policy_enforcement": {
+          "type": "boolean"
+        },
+
+        "validation": {
+          "type": "boolean"
+        }
+
+      }
+
+    },
+
+    "reference_implementations": {
+
+      "type": "array",
+
+      "items": {
+        "type": "string"
+      },
+
+      "uniqueItems": true
+
+    },
+
+    "future": {
+      "type": "object",
+      "additionalProperties": true
+    }
+
+  }
+
+}

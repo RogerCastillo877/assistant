@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schema/entities/04-policy.schema.json",
+
+  "title": "OSEF Policy Schema",
+  "description": "Defines the structure of an OSEF Policy.",
+
+  "type": "object",
+
+  "additionalProperties": false,
+
+  "required": [
+    "id",
+    "name",
+    "type",
+    "version",
+    "status",
+    "effect"
+  ],
+
+  "properties": {
+
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "description": "Unique policy identifier."
+    },
+
+    "name": {
+      "type": "string",
+      "minLength": 3
+    },
+
+    "description": {
+      "type": "string"
+    },
+
+    "type": {
+      "type": "string",
+      "enum": [
+        "security",
+        "privacy",
+        "governance",
+        "quality",
+        "execution",
+        "memory",
+        "knowledge",
+        "compliance",
+        "custom"
+      ]
+    },
+
+    "version": {
+      "type": "string",
+      "minLength": 1
+    },
+
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "active",
+        "deprecated",
+        "archived"
+      ]
+    },
+
+    "effect": {
+      "type": "string",
+      "enum": [
+        "allow",
+        "deny",
+        "require"
+      ]
+    },
+
+    "scope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "mission",
+          "agent",
+          "workflow",
+          "capability",
+          "skill",
+          "tool",
+          "resource",
+          "memory",
+          "project",
+          "runtime"
+        ]
+      },
+      "uniqueItems": true
+    },
+
+    "priority": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "default": 50
+    },
+
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+
+    "conditions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+
+    "exceptions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+
+    "requires_human_approval": {
+      "type": "boolean",
+      "default": false
+    },
+
+    "audit": {
+      "type": "boolean",
+      "default": true
+    },
+
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    }
+
+  }
+
+}

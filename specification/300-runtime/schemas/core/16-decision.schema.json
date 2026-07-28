@@ -1,0 +1,117 @@
+{
+"$schema": "https://json-schema.org/draft/2020-12/schema",
+"$id": "https://osef.dev/schema/core/16-decision.schema.json",
+"title": "OSEF Decision",
+"description": "Defines an engineering decision artifact used for governance, architecture, and project evolution.",
+"type": "object",
+"required": [
+"id",
+"title",
+"decision_type",
+"status",
+"owner",
+"date"
+],
+"properties": {
+"id": {
+"type": "string",
+"description": "Unique decision identifier.",
+"pattern": "^[A-Za-z0-9-]+$"
+},
+"title": {
+"type": "string",
+"minLength": 1
+},
+"description": {
+"type": "string"
+},
+"decision_type": {
+"type": "string",
+"enum": [
+"ADR",
+"RFC",
+"Governance",
+"Architecture",
+"Engineering",
+"Operational",
+"Strategic",
+"Other"
+]
+},
+"status": {
+"type": "string",
+"enum": [
+"Proposed",
+"Under Review",
+"Approved",
+"Rejected",
+"Superseded",
+"Deprecated"
+]
+},
+"owner": {
+"type": "string",
+"minLength": 1
+},
+"authority": {
+"type": "string"
+},
+"date": {
+"type": "string",
+"format": "date"
+},
+"motivation": {
+"type": "string"
+},
+"context": {
+"type": "string"
+},
+"decision": {
+"type": "string"
+},
+"rationale": {
+"type": "string"
+},
+"alternatives": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"uniqueItems": true,
+"default": []
+},
+"consequences": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"uniqueItems": true,
+"default": []
+},
+"affected_artifacts": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"uniqueItems": true,
+"default": []
+},
+"related_decisions": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"uniqueItems": true,
+"default": []
+},
+"references": {
+"type": "array",
+"items": {
+"type": "string"
+},
+"uniqueItems": true,
+"default": []
+}
+},
+"additionalProperties": false
+}

@@ -1,84 +1,252 @@
 # ============================================================================
-# OSEF Project Descriptor
+# OSEF Runtime Manifest
 # ============================================================================
-# This file defines the engineering configuration of an OSEF project.
+# Defines the runtime configuration of an OSEF-compliant project.
+#
+# This file is the entry point for the OSEF Runtime.
+#
+# It describes:
+#   - Framework compatibility
+#   - Project metadata
+#   - Runtime configuration
+#   - Discovery rules
+#   - Validation behavior
+#   - Engineering policies
+# ============================================================================
+# Schema:
+#   specification/300-runtime/schemas/osef.schema.json
 # ============================================================================
 
 osef:
-  specification: 0.1.0
+
+  specification: 0.2.0
   framework: Operating Systems Engineering Framework
-  maturity: Foundation
   profile: default
+  maturity: Foundation
+  runtime: 0.1.0
+
+# ----------------------------------------------------------------------------
+# Project
+# ----------------------------------------------------------------------------
 
 project:
+
   id: personal-os
+
   name: Personal OS
-  description: Personal Intelligent Operating System
-  version: 0.1.0
-  status: draft
+
+  description: >
+    Personal Intelligent Operating System
+    built using the Operating Systems Engineering Framework.
+
   type: reference-implementation
 
+  version: 0.1.0
+
+  status: draft
+
+# ----------------------------------------------------------------------------
+# Organization
+# ----------------------------------------------------------------------------
+
 organization:
+
   owner: Rocas
 
-lifecycle:
-  sdlc: OSEF-SDL-001
-  governance: OSEF-GOV-001
+# ----------------------------------------------------------------------------
+# Runtime
+# ----------------------------------------------------------------------------
+
+runtime:
+
+  environment: development
+
+  strict_validation: true
+
+  fail_fast: true
+
+  auto_discovery: true
+
+  cache_enabled: true
+
+# ----------------------------------------------------------------------------
+# Framework Documents
+# ----------------------------------------------------------------------------
+
+framework:
+
+  manifesto: OSEF-MAN-001
+
+  vision: OSEF-VIS-001
+
+  principles: OSEF-CPR-001
+
+  specification: OSEF-SPE-101
+
   architecture: OSEF-ARC-001
 
-specifications:
-  manifesto: OSEF-MAN-001
-  vision: OSEF-VIS-001
-  principles: OSEF-CPR-001
-  blueprint: OSEF-BLU-001
-  roadmap: OSEF-RDM-001
-  glossary: OSEF-GLS-001
   metamodel: OSEF-MTM-001
+
   artifact_model: OSEF-ATM-001
 
-missions:
-  - accelerate-learning
-  - financial-recovery
-  - job-search
+  governance: OSEF-SPE-110
 
-domains:
-  - learning
-  - finance
-  - career
+  sdlc: OSEF-SDL-001
 
-artifacts:
-  root: docs/
-  specifications: docs/specifications/
-  adr: docs/adr/
-  rfc: docs/rfc/
-  decisions: docs/decisions/
+# ----------------------------------------------------------------------------
+# Discovery
+# ----------------------------------------------------------------------------
 
-knowledge:
-  root: knowledge/
-  memory: knowledge/memory/
-  lessons: knowledge/lessons/
-  patterns: knowledge/patterns/
+discovery:
 
-templates:
-  root: templates/
+  missions: missions/
+
+  workflows: workflows/
+
+  capabilities: capabilities/
+
+  skills: skills/
+
+  tools: tools/
+
+  resources: resources/
+
+  memory: memory/
+
+  policies: policies/
+
+  knowledge: knowledge/
+
+# ----------------------------------------------------------------------------
+# Schemas
+# ----------------------------------------------------------------------------
 
 schemas:
-  root: schemas/
 
-automation:
-  validators: true
-  templates: true
-  documentation: true
+  root: specification/300-runtime/schemas/
+
+  validate_on_load: true
+
+# ----------------------------------------------------------------------------
+# Templates
+# ----------------------------------------------------------------------------
+
+templates:
+
+  root: specification/300-runtime/templates/
+
+# ----------------------------------------------------------------------------
+# Validators
+# ----------------------------------------------------------------------------
+
+validators:
+
+  schema: true
+
+  conformance: true
+
+  policies: true
+
+  traceability: true
+
+# ----------------------------------------------------------------------------
+# Traceability
+# ----------------------------------------------------------------------------
+
+traceability:
+
+  enabled: true
+
+  require_specification: true
+
+  require_validation: true
+
+  require_versioning: true
+
+# ----------------------------------------------------------------------------
+# Memory
+# ----------------------------------------------------------------------------
+
+memory:
+
+  enabled: true
+
+  persistent: true
+
+  capture_execution: true
+
+  capture_decisions: true
+
+# ----------------------------------------------------------------------------
+# Knowledge
+# ----------------------------------------------------------------------------
+
+knowledge:
+
+  enabled: true
+
+  learn_from_execution: true
+
+  lessons_learned: true
+
+  best_practices: true
+
+# ----------------------------------------------------------------------------
+# Policies
+# ----------------------------------------------------------------------------
+
+policies:
+
+  enforce: true
+
+  require_human_approval: true
+
+  deny_unknown_tools: true
+
+  audit_execution: true
+
+# ----------------------------------------------------------------------------
+# Quality
+# ----------------------------------------------------------------------------
 
 quality:
+
   semantic_versioning: true
-  traceability: required
+
   documentation_required: true
+
   architecture_review: required
 
+  traceability: required
+
+  policy_validation: required
+
+# ----------------------------------------------------------------------------
+# Automation
+# ----------------------------------------------------------------------------
+
+automation:
+
+  generate_templates: true
+
+  generate_documentation: true
+
+  validate_before_release: true
+
+# ----------------------------------------------------------------------------
+# Reference Implementations
+# ----------------------------------------------------------------------------
+
 reference_implementations:
+
   - Personal OS
 
-future:
-  planned:
-    - Marketing OS
+  - Marketing OS
+
+# ----------------------------------------------------------------------------
+# Future Extensions
+# ----------------------------------------------------------------------------
+
+extensions:
+
+  enabled: []

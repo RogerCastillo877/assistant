@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schema/entities/07-capability.schema.json",
+
+  "title": "OSEF Capability Schema",
+  "description": "Defines the structure of an OSEF Capability.",
+
+  "type": "object",
+
+  "required": [
+    "metadata",
+    "capability"
+  ],
+
+  "properties": {
+
+    "metadata": {
+      "$ref": "../core/01-metadata.schema.json"
+    },
+
+    "capability": {
+
+      "type": "object",
+
+      "additionalProperties": false,
+
+      "required": [
+        "id",
+        "name",
+        "description",
+        "purpose",
+        "version",
+        "status",
+        "owner",
+        "inputs",
+        "outputs",
+        "skills"
+      ],
+
+      "properties": {
+
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9-]+$"
+        },
+
+        "name": {
+          "type": "string",
+          "minLength": 3
+        },
+
+        "description": {
+          "type": "string"
+        },
+
+        "purpose": {
+          "type": "string",
+          "minLength": 10
+        },
+
+        "version": {
+          "type": "string"
+        },
+
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "review",
+            "approved",
+            "deprecated",
+            "archived"
+          ]
+        },
+
+        "owner": {
+          "type": "string"
+        },
+
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+
+        "preconditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+
+        "postconditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+
+        "policies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "uniqueItems": true
+        },
+
+        "skills": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+
+        "metrics": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "uniqueItems": true
+        },
+
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "uniqueItems": true
+        }
+
+      }
+
+    }
+
+  },
+
+  "additionalProperties": false
+
+}

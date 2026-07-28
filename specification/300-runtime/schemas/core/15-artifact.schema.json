@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schema/core/15-artifact.schema.json",
+  "title": "OSEF Artifact",
+  "description": "Generic engineering artifact used throughout the OSEF lifecycle.",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "artifact_type",
+    "version",
+    "status",
+    "owner",
+    "authority",
+    "classification",
+    "created",
+    "updated"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique artifact identifier.",
+      "pattern": "^[A-Za-z0-9-]+$"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "description": {
+      "type": "string"
+    },
+    "artifact_type": {
+      "type": "string",
+      "enum": [
+        "document",
+        "specification",
+        "architecture",
+        "policy",
+        "workflow",
+        "agent",
+        "capability",
+        "skill",
+        "tool",
+        "resource",
+        "memory",
+        "knowledge",
+        "decision",
+        "validation",
+        "release",
+        "template",
+        "schema",
+        "configuration",
+        "other"
+      ]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "review",
+        "approved",
+        "implemented",
+        "validated",
+        "released",
+        "deprecated",
+        "archived"
+      ]
+    },
+    "owner": {
+      "type": "string",
+      "minLength": 1
+    },
+    "authority": {
+      "type": "string",
+      "enum": [
+        "normative",
+        "informative"
+      ]
+    },
+    "classification": {
+      "type": "string",
+      "enum": [
+        "public",
+        "internal",
+        "restricted",
+        "confidential"
+      ]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "related_artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "created": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "additionalProperties": false
+}

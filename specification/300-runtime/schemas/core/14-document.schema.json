@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://osef.dev/schema/core/14-document.schema.json",
+  "title": "OSEF Document Schema",
+  "description": "Defines the common structure for every document managed within an OSEF project.",
+  "type": "object",
+  "required": [
+    "metadata",
+    "document"
+  ],
+  "properties": {
+    "metadata": {
+      "$ref": "./01-metadata.schema.json"
+    },
+    "document": {
+      "$ref": "#/$defs/document"
+    }
+  },
+  "$defs": {
+    "document": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "type",
+        "status"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique document identifier."
+        },
+        "title": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "Document classification.",
+          "enum": [
+            "manifesto",
+            "vision",
+            "charter",
+            "roadmap",
+            "principles",
+            "glossary",
+            "architecture",
+            "specification",
+            "policy",
+            "standard",
+            "guide",
+            "template",
+            "report",
+            "decision",
+            "knowledge",
+            "other"
+          ]
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "review",
+            "approved",
+            "released",
+            "deprecated",
+            "archived"
+          ]
+        },
+        "version": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "authority": {
+          "type": "string"
+        },
+        "classification": {
+          "type": "string",
+          "enum": [
+            "public",
+            "internal",
+            "restricted",
+            "confidential"
+          ]
+        },
+        "summary": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "related_documents": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
