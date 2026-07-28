@@ -30,7 +30,8 @@ REQUIRED_VALIDATORS = [
     "02-validate-schema.py",
     "03-validate-references.py",
     "04-validate-traceability.py",
-    "05-validate-policies.py"
+    "05-validate-policies.py",
+    "06-validate-document-references.py"
 
 ]
 

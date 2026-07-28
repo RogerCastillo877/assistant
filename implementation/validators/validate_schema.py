@@ -21,9 +21,10 @@ from pathlib import Path
 import json
 import sys
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+RUNTIME_ROOT = PROJECT_ROOT / "specification" / "300-runtime"
 
-SCHEMA_FOLDER = PROJECT_ROOT / "schemas"
+SCHEMA_FOLDER = RUNTIME_ROOT / "schemas"
 
 
 def validate_schema(file):

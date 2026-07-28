@@ -208,6 +208,10 @@ Examples include:
 - generators
 - runtime services
 
+These assets shall be treated as the authoritative implementation contract for conformance evaluation.
+
+A compliant implementation shall preserve the relationship between the normative specification, the project manifest, the runtime schemas, and the validators.
+
 These assets automate engineering without replacing engineering decisions.
 
 ---

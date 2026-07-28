@@ -20,10 +20,11 @@ from pathlib import Path
 import json
 import sys
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+RUNTIME_ROOT = PROJECT_ROOT / "specification" / "300-runtime"
 
 TRACEABILITY_FILE = (
-    PROJECT_ROOT /
+    RUNTIME_ROOT /
     "traceability.json"
 )
 
@@ -52,7 +53,7 @@ def collect_known_ids():
 
     ids = set()
 
-    for file in PROJECT_ROOT.rglob("*.yaml"):
+    for file in RUNTIME_ROOT.rglob("*.yaml"):
 
         try:
 

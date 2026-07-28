@@ -22,7 +22,8 @@ agent -> capabilities
 from pathlib import Path
 import yaml
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+RUNTIME_ROOT = PROJECT_ROOT / "specification" / "300-runtime"
 
 
 def load_yaml(file):
@@ -143,7 +144,7 @@ def walk(node, known, file, errors):
 
 def main():
 
-    errors = validate(PROJECT_ROOT)
+    errors = validate(RUNTIME_ROOT)
 
     if errors:
 

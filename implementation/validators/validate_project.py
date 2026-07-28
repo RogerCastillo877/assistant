@@ -19,7 +19,8 @@ Checks
 from pathlib import Path
 import sys
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+RUNTIME_ROOT = PROJECT_ROOT / "specification" / "300-runtime"
 
 REQUIRED = [
 
@@ -40,7 +41,7 @@ def validate():
 
     for item in REQUIRED:
 
-        path = PROJECT_ROOT / item
+        path = RUNTIME_ROOT / item
 
         if not path.exists():
 

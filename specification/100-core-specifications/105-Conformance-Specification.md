@@ -11,13 +11,13 @@ Last Updated: 2026-07-27
 
 Related Documents:
 
-- 101-OSEF-Specification.md
-- Core-Principles.md
-- Governance.md
-- Architecture.md
-- SDLC.md
-- Artifact-Model.md
-- Meta-Model.md
+- OSEF-SPE-001
+- OSEF-CPR-001
+- OSEF-GOV-001
+- OSEF-ARC-001
+- OSEF-SDL-001
+- OSEF-ATM-001
+- OSEF-MTM-001
 
 ---
 

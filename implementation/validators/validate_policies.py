@@ -20,7 +20,8 @@ from pathlib import Path
 import sys
 import yaml
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+RUNTIME_ROOT = PROJECT_ROOT / "specification" / "300-runtime"
 
 VALID_EFFECTS = {
     "allow",
@@ -48,7 +49,7 @@ def validate():
 
     ids = set()
 
-    for file in PROJECT_ROOT.rglob("*.yaml"):
+    for file in RUNTIME_ROOT.rglob("*.yaml"):
 
         try:
 

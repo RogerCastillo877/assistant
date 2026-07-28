@@ -11,13 +11,13 @@ Last Updated: 2026-07-27
 
 Related Documents:
 
-- 101-OSEF-Specification.md
-- 105-Conformance-Specification.md
-- 106-Quality-Specification.md
-- 107-Security-Specification.md
-- Architecture.md
-- Meta-Model.md
-- Artifact-Model.md
+- OSEF-SPE-001
+- OSEF-SPE-105
+- OSEF-SPE-106
+- OSEF-SPE-107
+- OSEF-ARC-001
+- OSEF-MTM-001
+- OSEF-ATM-001
 
 ---
 
