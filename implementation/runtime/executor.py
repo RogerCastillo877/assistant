@@ -11,16 +11,29 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from implementation.runtime.registry import RuntimeRegistry
+
 from implementation.runtime.errors import RuntimeError
+
 from implementation.runtime.context import (
     ExecutionContext,
 )
+
 from implementation.runtime.state import (
     WorkflowState,
 )
+
 from implementation.runtime.events import (
     EventStore,
 )
+
+from implementation.runtime.capability_executor import (
+    CapabilityExecutor,
+)
+
+from implementation.runtime.policy_engine import (
+    PolicyEngine,
+)
+
 
 @dataclass(slots=True)
 class ExecutionResult:
@@ -38,10 +51,14 @@ class WorkflowExecutor:
         self,
         registry: RuntimeRegistry,
         events: EventStore,
+        capability_executor: CapabilityExecutor,
+        policy_engine: PolicyEngine,
     ) -> None:
 
         self.registry = registry
         self.events = events
+        self.capability_executor = capability_executor
+        self.policy_engine = policy_engine
 
     def execute(
         self,
@@ -55,13 +72,20 @@ class WorkflowExecutor:
 
         if workflow is None:
 
-            context = ExecutionContext(
-                workflow_id=workflow_id
-            )
-
             raise RuntimeError(
                 f"Workflow '{workflow_id}' not found."
             )
+
+        if context is None:
+
+            context = ExecutionContext(
+                workflow_id=workflow.id,
+            )
+
+        self.policy_engine.enforce_workflow(
+            workflow,
+            context,
+        )
 
         if context.state is None:
 
@@ -97,6 +121,10 @@ class WorkflowExecutor:
 
             step_id = step["id"]
 
+            capability_id = step.get(
+                "capability"
+            )
+
             self.events.emit(
                 "workflow.step.started",
                 {
@@ -107,12 +135,19 @@ class WorkflowExecutor:
 
             name = step.get(
                 "name",
-                step.get("id", "unknown"),
+                step_id,
             )
 
             print(
                 f"[{index}/{total}] {name}"
             )
+
+            if capability_id:
+
+                self.capability_executor.execute(
+                    capability_id,
+                    context,
+                )
 
             context.state.mark_step_completed(
                 step_id

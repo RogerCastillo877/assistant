@@ -16,6 +16,8 @@ def test_workflow_state():
     executor = WorkflowExecutor(
         engine.registry,
         engine.events,
+        engine.capability_executor,
+        engine.policy_engine,
     )
 
     context = ExecutionContext(

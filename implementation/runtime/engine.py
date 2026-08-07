@@ -15,9 +15,29 @@ from implementation.runtime.project import Project
 from implementation.runtime.registry import RuntimeRegistry
 from implementation.runtime.resolver import RuntimeResolver
 from implementation.runtime.errors import ResolutionError
-from implementation.runtime.executor import WorkflowExecutor
+
 from implementation.runtime.events import (
     EventStore,
+)
+
+from implementation.runtime.executor import (
+    WorkflowExecutor,
+)
+
+from implementation.runtime.tool_executor import (
+    ToolExecutor,
+)
+
+from implementation.runtime.skill_executor import (
+    SkillExecutor,
+)
+
+from implementation.runtime.capability_executor import (
+    CapabilityExecutor,
+)
+
+from implementation.runtime.policy_engine import (
+    PolicyEngine,
 )
 
 
@@ -25,9 +45,6 @@ from implementation.runtime.events import (
 class RuntimeEngine:
     """
     Main runtime container.
-
-    Holds the loaded project, entity registry
-    and dependency resolver.
     """
 
     project: Project
@@ -38,21 +55,22 @@ class RuntimeEngine:
 
     events: EventStore
 
+    tool_executor: ToolExecutor
+
+    skill_executor: SkillExecutor
+
+    capability_executor: CapabilityExecutor
+
+    policy_engine: PolicyEngine
+
     executor: WorkflowExecutor
+
 
 def bootstrap(
     validate: bool = True,
 ) -> RuntimeEngine:
     """
     Bootstraps the OSEF runtime.
-
-    Steps:
-
-    1. Load project artifacts.
-    2. Build registry indexes.
-    3. Create dependency resolver.
-    4. Validate references.
-    5. Return runtime engine.
     """
 
     project = load_project()
@@ -63,9 +81,29 @@ def bootstrap(
 
     events = EventStore()
 
+    tool_executor = ToolExecutor(
+        registry=registry,
+    )
+
+    skill_executor = SkillExecutor(
+        registry=registry,
+        tool_executor=tool_executor,
+    )
+
+    capability_executor = CapabilityExecutor(
+        registry=registry,
+        skill_executor=skill_executor,
+    )
+
+    policy_engine = PolicyEngine(
+        registry=registry
+    )
+
     executor = WorkflowExecutor(
         registry=registry,
         events=events,
+        capability_executor=capability_executor,
+        policy_engine=policy_engine,
     )
 
     if validate:
@@ -82,6 +120,10 @@ def bootstrap(
         project=project,
         registry=registry,
         resolver=resolver,
-        executor=executor,
         events=events,
+        tool_executor=tool_executor,
+        skill_executor=skill_executor,
+        capability_executor=capability_executor,
+        policy_engine=policy_engine,
+        executor=executor,
     )
