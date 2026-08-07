@@ -1,62 +1,76 @@
-id: learning-workflow
+metadata:
 
-name: Learning Workflow
+  DocumentID: OSEF-WFL-001
+  Title: Learning Workflow
+  Version: 0.1.0
+  Status: Approved
+  Authority: Normative
+  Owner: OSEF
+  Classification: Public
+  Created: 2026-07-28
+  LastUpdated: 2026-07-28
 
-description: >
-  Reference workflow showing how an OSEF agent executes a learning
-  process from planning to knowledge generation.
+workflow:
 
-purpose: Learn a new topic using reusable engineering practices.
+  id: learning-workflow
 
-version: "0.1.0"
+  name: Learning Workflow
 
-status: active
+  description: >
+    Reference workflow showing how an OSEF agent executes a learning
+    process from planning to knowledge generation.
 
-mission: learning
+  purpose: Learn a new topic using reusable engineering practices.
 
-policies:
-  - default-governance
+  version: "0.1.0"
 
-agent: planner
+  status: active
 
-inputs:
-  - learning-goal
+  mission: learning
 
-outputs:
-  - knowledge-asset
+  policies:
+    - default-governance
 
-triggers:
-  - manual
-  - scheduled
+  agent: planner
 
-steps:
+  inputs:
+    - learning-goal
 
-  - id: planning
-    name: Planning
-    description: Define objectives and execution strategy.
-    capability: planning
+  outputs:
+    - knowledge-asset
 
-  - id: search
-    name: Search Information
-    description: Collect reliable information.
-    capability: planning
+  triggers:
+    - manual
+    - scheduled
 
-  - id: validate
-    name: Validate Information
-    description: Verify quality and consistency.
-    capability: planning
+  steps:
 
-  - id: generate
-    name: Generate Knowledge
-    description: Produce reusable knowledge.
-    capability: planning
+    - id: planning
+      name: Planning
+      description: Define objectives and execution strategy.
+      capability: planning
 
-metrics:
-  - completion-rate
-  - execution-time
-  - quality-score
+    - id: search
+      name: Search Information
+      description: Collect reliable information.
+      capability: planning
 
-tags:
-  - runtime
-  - workflow
-  - learning
+    - id: validate
+      name: Validate Information
+      description: Verify quality and consistency.
+      capability: planning
+
+    - id: generate
+      name: Generate Knowledge
+      description: Produce reusable knowledge.
+      capability: planning
+
+  metrics:
+    - completion-rate
+    - execution-time
+    - quality-score
+
+  tags:
+    - runtime
+    - workflow
+    - learning

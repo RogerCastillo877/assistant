@@ -3,14 +3,13 @@ OSEF Runtime
 
 loader.py
 
-Loads an OSEF project into memory using a minimal viable metamodel.
+Loads OSEF YAML artifacts and converts them into
+typed runtime objects.
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any
 
 from implementation.runtime.common import (
     find_yaml_files,
@@ -18,91 +17,222 @@ from implementation.runtime.common import (
     load_yaml,
 )
 
+from implementation.runtime.model import (
+    Mission,
+    Agent,
+    Workflow,
+    Capability,
+    Skill,
+    Tool,
+    Resource,
+    Memory,
+    Knowledge,
+)
 
-@dataclass
-class ProjectModel:
-
-    config: dict[str, Any] = field(default_factory=dict)
-
-    missions: list[dict[str, Any]] = field(default_factory=list)
-
-    policies: list[dict[str, Any]] = field(default_factory=list)
-
-    agents: list[dict[str, Any]] = field(default_factory=list)
-
-    workflows: list[dict[str, Any]] = field(default_factory=list)
-
-    capabilities: list[dict[str, Any]] = field(default_factory=list)
-
-    skills: list[dict[str, Any]] = field(default_factory=list)
-
-    tools: list[dict[str, Any]] = field(default_factory=list)
-
-    resources: list[dict[str, Any]] = field(default_factory=list)
-
-    memory: list[dict[str, Any]] = field(default_factory=list)
-
-    knowledge: list[dict[str, Any]] = field(default_factory=list)
-
-    documents: list[dict[str, Any]] = field(default_factory=list)
-
-    releases: list[dict[str, Any]] = field(default_factory=list)
-
-    decisions: list[dict[str, Any]] = field(default_factory=list)
-
-    traceability: list[dict[str, Any]] = field(default_factory=list)
+from implementation.runtime.project import Project
 
 
-def _add_collection(target: list[dict[str, Any]], payload: dict[str, Any]) -> None:
-    if isinstance(payload, dict):
-        target.append(payload)
+# ============================================================
+# Entity Builders
+# ============================================================
 
 
-def load_project() -> ProjectModel:
-    """
-    Load the core OSEF entities from the repository's runtime examples.
+def _build_mission(data: dict) -> Mission:
 
-    This implementation intentionally supports only the initial, minimal
-    metamodel required for the first runtime iteration.
-    """
+    return Mission(
+        id=data["id"],
+        name=data["name"],
+        purpose=data["purpose"],
+        version=data["version"],
+        status=data["status"],
+        description=data.get("description"),
+        workflows=data.get("workflows", []),
+        policies=data.get("policies", []),
+        tags=data.get("tags", []),
+    )
 
-    project = ProjectModel()
+
+def _build_agent(data: dict) -> Agent:
+
+    return Agent(
+        id=data["id"],
+        name=data["name"],
+        version=data["version"],
+        status=data["status"],
+        mission=data.get("mission"),
+        workflows=data.get("workflows", []),
+        capabilities=data.get("capabilities", []),
+        tags=data.get("tags", []),
+    )
+
+
+def _build_workflow(data: dict) -> Workflow:
+
+    return Workflow(
+        id=data["id"],
+        name=data["name"],
+        purpose=data["purpose"],
+        version=data["version"],
+        status=data["status"],
+        mission=data.get("mission"),
+        steps=data.get("steps", []),
+    )
+
+
+def _build_capability(data: dict) -> Capability:
+
+    cap = data["capability"]
+
+    return Capability(
+        id=cap["id"],
+        name=cap["name"],
+        purpose=cap["purpose"],
+        version=cap["version"],
+        status=cap["status"],
+        skills=cap.get("skills", []),
+    )
+
+
+def _build_skill(data: dict) -> Skill:
+
+    skill = data["skill"]
+
+    return Skill(
+        id=skill["id"],
+        name=skill["name"],
+        purpose=skill["purpose"],
+        owner=skill["owner"],
+        status=skill["status"],
+        tools=skill.get("tools", []),
+        resources=skill.get("resources", []),
+    )
+
+
+def _build_tool(data: dict) -> Tool:
+
+    tool = data["tool"]
+
+    return Tool(
+        id=tool["id"],
+        name=tool["name"],
+        type=tool["type"],
+        version=tool["version"],
+        status=tool["status"],
+    )
+
+
+def _build_resource(data: dict) -> Resource:
+
+    resource = data["resource"]
+
+    return Resource(
+        id=resource["id"],
+        name=resource["name"],
+        type=resource["type"],
+        lifecycle=resource["lifecycle"],
+        version=resource["version"],
+    )
+
+
+def _build_memory(data: dict) -> Memory:
+
+    memory = data["memory"]
+
+    return Memory(
+        id=memory["id"],
+        name=memory["name"],
+        type=memory["type"],
+        scope=memory["scope"],
+        retention=memory["retention"],
+    )
+
+
+def _build_knowledge(data: dict) -> Knowledge:
+
+    knowledge = data["knowledge"]
+
+    return Knowledge(
+        id=knowledge["id"],
+        name=knowledge["name"],
+        category=knowledge["category"],
+        version=knowledge["version"],
+        status=knowledge["status"],
+    )
+
+
+# ============================================================
+# Loader
+# ============================================================
+
+
+def load_project() -> Project:
+
     root = get_project_root()
 
-    manifest_path = root / "specification" / "300-runtime" / "config" / "osef.yaml"
-    if manifest_path.exists():
-        project.config = load_yaml(manifest_path)
+    project = Project()
 
-    example_root = root / "specification" / "300-runtime" / "examples"
-    if not example_root.exists():
+    examples_root = (
+        root
+        / "specification"
+        / "300-runtime"
+        / "examples"
+    )
+
+    if not examples_root.exists():
         return project
 
-    collection_map = {
-        "missions": project.missions,
-        "policies": project.policies,
-        "agents": project.agents,
-        "workflows": project.workflows,
-        "capabilities": project.capabilities,
-        "skills": project.skills,
-        "tools": project.tools,
-        "resources": project.resources,
-        "memory": project.memory,
-        "knowledge": project.knowledge,
-    }
+    for path in find_yaml_files(examples_root):
 
-    for path in find_yaml_files(example_root):
         payload = load_yaml(path)
+
         if not isinstance(payload, dict):
             continue
 
-        parent_name = path.parent.name
-        if parent_name in collection_map:
-            _add_collection(collection_map[parent_name], payload)
-            continue
+        parent = path.parent.name
 
-        if isinstance(payload.get("kind"), str):
-            kind = payload["kind"].lower()
-            if kind in collection_map:
-                _add_collection(collection_map[kind], payload)
+        if parent == "missions":
+            project.missions.append(
+                _build_mission(payload)
+            )
+
+        elif parent == "agents":
+            project.agents.append(
+                _build_agent(payload)
+            )
+
+        elif parent == "workflows":
+            project.workflows.append(
+                _build_workflow(payload)
+            )
+
+        elif parent == "capabilities":
+            project.capabilities.append(
+                _build_capability(payload)
+            )
+
+        elif parent == "skills":
+            project.skills.append(
+                _build_skill(payload)
+            )
+
+        elif parent == "tools":
+            project.tools.append(
+                _build_tool(payload)
+            )
+
+        elif parent == "resources":
+            project.resources.append(
+                _build_resource(payload)
+            )
+
+        elif parent == "memory":
+            project.memory.append(
+                _build_memory(payload)
+            )
+
+        elif parent == "knowledge":
+            project.knowledge.append(
+                _build_knowledge(payload)
+            )
 
     return project

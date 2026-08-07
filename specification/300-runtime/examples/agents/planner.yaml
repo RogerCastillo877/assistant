@@ -1,37 +1,51 @@
-id: planner
+metadata:
 
-name: Planning Agent
+  DocumentID: OSEF-AGT-001
+  Title: Planning Agent
+  Version: 0.1.0
+  Status: Approved
+  Authority: Normative
+  Owner: OSEF
+  Classification: Public
+  Created: 2026-07-28
+  LastUpdated: 2026-07-28
 
-description: >
-  Reference agent responsible for planning and coordinating
-  learning activities inside the OSEF runtime.
+agent:
 
-version: "0.1.0"
+  id: planner
 
-status: active
+  name: Planning Agent
 
-type: planner
+  description: >
+    Reference agent responsible for planning and coordinating
+    learning activities inside the OSEF runtime.
 
-mission: learning
+  version: "0.1.0"
 
-policies:
-  - default-governance
+  status: active
 
-workflows:
-  - learning-workflow
+  type: planner
 
-capabilities:
-  - planning
+  mission: learning
 
-memory: true
+  policies:
+    - default-governance
 
-knowledge: true
+  workflows:
+    - learning-workflow
 
-human_approval: false
+  capabilities:
+    - planning
 
-runtime: default-runtime
+  memory: true
 
-tags:
-  - runtime
-  - planner
-  - example
+  knowledge: true
+
+  human_approval: false
+
+  runtime: default-runtime
+
+  tags:
+    - runtime
+    - planner
+    - example

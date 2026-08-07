@@ -1,49 +1,63 @@
-id: learning
+metadata:
 
-name: Learning Mission
+  DocumentID: OSEF-MIS-001
+  Title: Learning Mission
+  Version: 0.1.0
+  Status: Approved
+  Authority: Normative
+  Owner: OSEF
+  Classification: Public
+  Created: 2026-07-28
+  LastUpdated: 2026-07-28
 
-purpose: Accelerate learning through reusable engineering workflows.
+mission:
 
-description: >
-  Reference mission demonstrating how OSEF models a complete mission
-  from planning through knowledge generation.
+  id: learning
 
-version: "0.1.0"
+  name: Learning Mission
 
-status: active
+  purpose: Accelerate learning through reusable engineering workflows.
 
-priority: high
+  description: >
+    Reference mission demonstrating how OSEF models a complete mission
+    from planning through knowledge generation.
 
-owner: Rocas
+  version: "0.1.0"
 
-domain: education
+  status: active
 
-workflows:
-  - learning-workflow
+  priority: high
 
-policies:
-  - default-governance
+  owner: Rocas
 
-requirements:
-  - internet-access
-  - human-feedback
+  domain: education
 
-success_criteria:
-  - learning-objective-completed
-  - reusable-knowledge-generated
+  workflows:
+    - learning-workflow
 
-metrics:
-  completion_rate: 100
-  quality_score: 90
+  policies:
+    - default-governance
 
-knowledge_outputs:
-  - search-best-practices
+  requirements:
+    - internet-access
+    - human-feedback
 
-memory: true
+  success_criteria:
+    - learning-objective-completed
+    - reusable-knowledge-generated
 
-human_approval: false
+  metrics:
+    completion_rate: 100
+    quality_score: 90
 
-tags:
-  - runtime
-  - example
-  - learning
+  knowledge_outputs:
+    - search-best-practices
+
+  memory: true
+
+  human_approval: false
+
+  tags:
+    - runtime
+    - example
+    - learning
