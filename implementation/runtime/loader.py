@@ -46,8 +46,17 @@ def _build_mission(data: dict) -> Mission:
         version=data["version"],
         status=data["status"],
         description=data.get("description"),
+        priority=data.get("priority"),
+        owner=data.get("owner"),
+        domain=data.get("domain"),
         workflows=data.get("workflows", []),
         policies=data.get("policies", []),
+        requirements=data.get("requirements", []),
+        success_criteria=data.get("success_criteria", []),
+        metrics=data.get("metrics", {}),
+        knowledge_outputs=data.get("knowledge_outputs", []),
+        memory=data.get("memory", True),
+        human_approval=data.get("human_approval", False),
         tags=data.get("tags", []),
     )
 
@@ -59,9 +68,16 @@ def _build_agent(data: dict) -> Agent:
         name=data["name"],
         version=data["version"],
         status=data["status"],
+        type=data.get("type", "assistant"),
+        description=data.get("description"),
         mission=data.get("mission"),
+        policies=data.get("policies", []),
         workflows=data.get("workflows", []),
         capabilities=data.get("capabilities", []),
+        memory=data.get("memory", True),
+        knowledge=data.get("knowledge", True),
+        human_approval=data.get("human_approval", False),
+        runtime=data.get("runtime"),
         tags=data.get("tags", []),
     )
 
@@ -74,89 +90,140 @@ def _build_workflow(data: dict) -> Workflow:
         purpose=data["purpose"],
         version=data["version"],
         status=data["status"],
+        description=data.get("description"),
         mission=data.get("mission"),
+        policies=data.get("policies", []),
+        agent=data.get("agent"),
+        inputs=data.get("inputs", []),
+        outputs=data.get("outputs", []),
+        triggers=data.get("triggers", []),
         steps=data.get("steps", []),
+        metrics=data.get("metrics", []),
+        tags=data.get("tags", []),
     )
 
 
 def _build_capability(data: dict) -> Capability:
 
-    cap = data["capability"]
-
     return Capability(
-        id=cap["id"],
-        name=cap["name"],
-        purpose=cap["purpose"],
-        version=cap["version"],
-        status=cap["status"],
-        skills=cap.get("skills", []),
+        id=data["id"],
+        name=data["name"],
+        description=data["description"],
+        purpose=data["purpose"],
+        version=data["version"],
+        status=data["status"],
+        owner=data["owner"],
+        inputs=data.get("inputs", []),
+        outputs=data.get("outputs", []),
+        preconditions=data.get("preconditions", []),
+        postconditions=data.get("postconditions", []),
+        policies=data.get("policies", []),
+        required_tools=data.get("required_tools", []),
+        required_resources=data.get("required_resources", []),
+        skills=data.get("skills", []),
+        metrics=data.get("metrics", []),
+        tags=data.get("tags", []),
     )
 
 
 def _build_skill(data: dict) -> Skill:
 
-    skill = data["skill"]
-
     return Skill(
-        id=skill["id"],
-        name=skill["name"],
-        purpose=skill["purpose"],
-        owner=skill["owner"],
-        status=skill["status"],
-        tools=skill.get("tools", []),
-        resources=skill.get("resources", []),
+        id=data["id"],
+        name=data["name"],
+        description=data["description"],
+        purpose=data["purpose"],
+        owner=data["owner"],
+        status=data["status"],
+        inputs=data.get("inputs", []),
+        outputs=data.get("outputs", []),
+        tools=data.get("tools", []),
+        resources=data.get("resources", []),
+        memory=data.get("memory", []),
+        policies=data.get("policies", []),
+        constraints=data.get("constraints", []),
+        preconditions=data.get("preconditions", []),
+        postconditions=data.get("postconditions", []),
+        metrics=data.get("metrics", []),
+        tags=data.get("tags", []),
     )
 
 
 def _build_tool(data: dict) -> Tool:
 
-    tool = data["tool"]
-
     return Tool(
-        id=tool["id"],
-        name=tool["name"],
-        type=tool["type"],
-        version=tool["version"],
-        status=tool["status"],
+        id=data["id"],
+        name=data["name"],
+        description=data.get("description", ""),
+        type=data["type"],
+        owner=data["owner"],
+        version=data["version"],
+        status=data["status"],
+        endpoint=data.get("endpoint"),
+        authentication=data.get("authentication"),
+        inputs=data.get("inputs", []),
+        outputs=data.get("outputs", []),
     )
 
 
 def _build_resource(data: dict) -> Resource:
 
-    resource = data["resource"]
-
     return Resource(
-        id=resource["id"],
-        name=resource["name"],
-        type=resource["type"],
-        lifecycle=resource["lifecycle"],
-        version=resource["version"],
+        id=data["id"],
+        name=data["name"],
+        description=data.get("description", ""),
+        type=data["type"],
+        owner=data["owner"],
+        classification=data["classification"],
+        lifecycle=data["lifecycle"],
+        version=data["version"],
+        location=data.get("location"),
+        provider=data.get("provider"),
+        format=data.get("format"),
+        access=data.get("access", {}),
+        dependencies=data.get("dependencies", []),
+        used_by=data.get("used_by", []),
+        tags=data.get("tags", []),
     )
 
 
 def _build_memory(data: dict) -> Memory:
 
-    memory = data["memory"]
-
     return Memory(
-        id=memory["id"],
-        name=memory["name"],
-        type=memory["type"],
-        scope=memory["scope"],
-        retention=memory["retention"],
+        id=data["id"],
+        name=data["name"],
+        type=data["type"],
+        scope=data["scope"],
+        retention=data["retention"],
+        purpose=data.get("purpose"),
+        description=data.get("description"),
+        owner=data.get("owner"),
+        storage=data.get("storage"),
+        encryption=data.get("encryption", False),
+        classification=data.get("classification"),
+        policies=data.get("policies", []),
+        sources=data.get("sources", []),
+        consumers=data.get("consumers", []),
     )
 
 
 def _build_knowledge(data: dict) -> Knowledge:
 
-    knowledge = data["knowledge"]
-
     return Knowledge(
-        id=knowledge["id"],
-        name=knowledge["name"],
-        category=knowledge["category"],
-        version=knowledge["version"],
-        status=knowledge["status"],
+        id=data["id"],
+        name=data["name"],
+        description=data["description"],
+        category=data["category"],
+        status=data["status"],
+        source=data["source"],
+        owner=data["owner"],
+        version=data["version"],
+        tags=data.get("tags", []),
+        references=data.get("references", []),
+        related_capabilities=data.get("related_capabilities", []),
+        related_skills=data.get("related_skills", []),
+        related_workflows=data.get("related_workflows", []),
+        validation=data.get("validation", {}),
     )
 
 
@@ -171,6 +238,19 @@ def load_project() -> Project:
 
     project = Project()
 
+    project.root_path = str(root)
+
+    config_file = (
+        root
+        / "specification"
+        / "300-runtime"
+        / "config"
+        / "osef.yaml"
+    )
+
+    if config_file.exists():
+        project.config = load_yaml(config_file)
+
     examples_root = (
         root
         / "specification"
@@ -183,7 +263,11 @@ def load_project() -> Project:
 
     for path in find_yaml_files(examples_root):
 
+        print(path)
+
         payload = load_yaml(path)
+
+        print(payload)
 
         if not isinstance(payload, dict):
             continue
@@ -192,47 +276,49 @@ def load_project() -> Project:
 
         if parent == "missions":
             project.missions.append(
-                _build_mission(payload)
+                _build_mission(payload.get("mission", payload))
             )
 
         elif parent == "agents":
             project.agents.append(
-                _build_agent(payload)
+                _build_agent(payload.get("agent", payload))
             )
 
         elif parent == "workflows":
             project.workflows.append(
-                _build_workflow(payload)
+                _build_workflow(payload.get("workflow", payload))
             )
 
         elif parent == "capabilities":
             project.capabilities.append(
-                _build_capability(payload)
+                _build_capability(payload.get("capability", payload))
             )
 
         elif parent == "skills":
             project.skills.append(
-                _build_skill(payload)
+                _build_skill(payload.get("skill", payload))
             )
 
         elif parent == "tools":
             project.tools.append(
-                _build_tool(payload)
+                _build_tool(payload.get("tool", payload))
             )
 
         elif parent == "resources":
             project.resources.append(
-                _build_resource(payload)
+                _build_resource(payload.get("resource", payload))
             )
 
         elif parent == "memory":
             project.memory.append(
-                _build_memory(payload)
+                _build_memory(payload.get("memory", payload))
             )
 
         elif parent == "knowledge":
             project.knowledge.append(
-                _build_knowledge(payload)
+                _build_knowledge(payload.get("knowledge", payload))
             )
+
+    project.loaded = True
 
     return project
