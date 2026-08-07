@@ -16,6 +16,9 @@ from implementation.runtime.registry import RuntimeRegistry
 from implementation.runtime.resolver import RuntimeResolver
 from implementation.runtime.errors import ResolutionError
 from implementation.runtime.executor import WorkflowExecutor
+from implementation.runtime.events import (
+    EventStore,
+)
 
 
 @dataclass(slots=True)
@@ -32,6 +35,8 @@ class RuntimeEngine:
     registry: RuntimeRegistry
 
     resolver: RuntimeResolver
+
+    events: EventStore
 
     executor: WorkflowExecutor
 
@@ -56,7 +61,12 @@ def bootstrap(
 
     resolver = RuntimeResolver(registry)
 
-    executor = WorkflowExecutor(registry)
+    events = EventStore()
+
+    executor = WorkflowExecutor(
+        registry=registry,
+        events=events,
+    )
 
     if validate:
 
@@ -73,4 +83,5 @@ def bootstrap(
         registry=registry,
         resolver=resolver,
         executor=executor,
+        events=events,
     )

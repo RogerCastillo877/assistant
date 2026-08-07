@@ -263,11 +263,7 @@ def load_project() -> Project:
 
     for path in find_yaml_files(examples_root):
 
-        print(path)
-
         payload = load_yaml(path)
-
-        print(payload)
 
         if not isinstance(payload, dict):
             continue

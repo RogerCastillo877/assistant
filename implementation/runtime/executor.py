@@ -18,6 +18,9 @@ from implementation.runtime.context import (
 from implementation.runtime.state import (
     WorkflowState,
 )
+from implementation.runtime.events import (
+    EventStore,
+)
 
 @dataclass(slots=True)
 class ExecutionResult:
@@ -34,9 +37,11 @@ class WorkflowExecutor:
     def __init__(
         self,
         registry: RuntimeRegistry,
+        events: EventStore,
     ) -> None:
 
         self.registry = registry
+        self.events = events
 
     def execute(
         self,
@@ -64,6 +69,13 @@ class WorkflowExecutor:
                 workflow_id=workflow.id
             )
 
+        self.events.emit(
+            "workflow.started",
+            {
+                "workflow_id": workflow.id,
+            },
+        )
+
         completed = 0
 
         total = len(workflow.steps)
@@ -83,8 +95,14 @@ class WorkflowExecutor:
             start=1,
         ):
 
-            context.state.mark_step_completed(
-                step["id"]
+            step_id = step["id"]
+
+            self.events.emit(
+                "workflow.step.started",
+                {
+                    "workflow_id": workflow.id,
+                    "step_id": step_id,
+                },
             )
 
             name = step.get(
@@ -96,12 +114,50 @@ class WorkflowExecutor:
                 f"[{index}/{total}] {name}"
             )
 
+            context.state.mark_step_completed(
+                step_id
+            )
+
             completed += 1
 
-            context.state.mark_completed()
+            self.events.emit(
+                "workflow.step.completed",
+                {
+                    "workflow_id": workflow.id,
+                    "step_id": step_id,
+                },
+            )
+
+        context.state.mark_completed()
+
+        self.events.emit(
+            "workflow.completed",
+            {
+                "workflow_id": workflow.id,
+                "completed_steps": completed,
+            },
+        )
 
         return ExecutionResult(
             workflow_id=workflow.id,
             completed_steps=completed,
             success=True,
         )
+
+    def execute_with_context(
+        self,
+        workflow_id: str,
+        inputs: dict | None = None,
+    ) -> ExecutionContext:
+
+        context = ExecutionContext(
+            workflow_id=workflow_id,
+            inputs=inputs or {},
+        )
+
+        self.execute(
+            workflow_id=workflow_id,
+            context=context,
+        )
+
+        return context
