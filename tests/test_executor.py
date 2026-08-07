@@ -14,10 +14,10 @@ def test_execute_learning_workflow():
     engine = bootstrap()
 
     executor = WorkflowExecutor(
-        engine.registry,
-        engine.events,
-        engine.capability_executor,
-        engine.policy_engine,
+        registry=engine.registry,
+        events=engine.events,
+        policy_engine=engine.policy_engine,
+        capability_executor=engine.capability_executor,
     )
 
     context = ExecutionContext(

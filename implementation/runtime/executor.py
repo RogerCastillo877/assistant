@@ -51,14 +51,14 @@ class WorkflowExecutor:
         self,
         registry: RuntimeRegistry,
         events: EventStore,
-        capability_executor: CapabilityExecutor,
         policy_engine: PolicyEngine,
+        capability_executor: CapabilityExecutor,
     ) -> None:
 
         self.registry = registry
         self.events = events
-        self.capability_executor = capability_executor
         self.policy_engine = policy_engine
+        self.capability_executor = capability_executor
 
     def execute(
         self,

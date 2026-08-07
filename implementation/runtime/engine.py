@@ -40,6 +40,13 @@ from implementation.runtime.policy_engine import (
     PolicyEngine,
 )
 
+from implementation.runtime.agent_executor import (
+    AgentExecutor,
+)
+
+from implementation.runtime.agent_runtime import (
+    AgentRuntime,
+)
 
 @dataclass(slots=True)
 class RuntimeEngine:
@@ -65,6 +72,9 @@ class RuntimeEngine:
 
     executor: WorkflowExecutor
 
+    agent_executor: AgentExecutor
+
+    agent_runtime: AgentRuntime
 
 def bootstrap(
     validate: bool = True,
@@ -96,7 +106,7 @@ def bootstrap(
     )
 
     policy_engine = PolicyEngine(
-        registry=registry
+        registry=registry,
     )
 
     executor = WorkflowExecutor(
@@ -106,15 +116,15 @@ def bootstrap(
         policy_engine=policy_engine,
     )
 
-    if validate:
+    agent_executor = AgentExecutor(
+        registry=registry,
+        workflow_executor=executor,
+    )
 
-        report = resolver.validate()
-
-        if not report.valid:
-
-            raise ResolutionError(
-                "\n".join(report.errors)
-            )
+    agent_runtime = AgentRuntime(
+        registry=registry,
+        agent_executor=agent_executor,
+    )
 
     return RuntimeEngine(
         project=project,
@@ -125,5 +135,7 @@ def bootstrap(
         skill_executor=skill_executor,
         capability_executor=capability_executor,
         policy_engine=policy_engine,
+        agent_executor=agent_executor,
+        agent_runtime=agent_runtime,
         executor=executor,
     )
