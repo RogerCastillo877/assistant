@@ -118,6 +118,10 @@ from implementation.runtime.query_engine import (
     QueryEngine,
 )
 
+from implementation.runtime.dashboard import (
+    RuntimeDashboard,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -175,6 +179,8 @@ class RuntimeEngine:
     knowledge_pipeline: KnowledgePipeline
 
     lifecycle: RuntimeLifecycle
+
+    dashboard: RuntimeDashboard
 
 def bootstrap(
     validate: bool = True,
@@ -366,6 +372,20 @@ def bootstrap(
             )
 
     #
+    # Dashboard
+    #
+
+    dashboard = RuntimeDashboard(
+        registry=registry,
+        memory_engine=memory,
+        knowledge_engine=knowledge,
+        traceability_engine=traceability,
+        artifact_engine=artifact_engine,
+        decision_engine=decision_engine,
+        outcome_engine=outcome_engine,
+    )
+
+    #
     # Runtime Container
     #
 
@@ -396,4 +416,5 @@ def bootstrap(
         mission_runtime=mission_runtime,
         mission_projection=mission_projection,
         query=query,
+        dashboard=dashboard,
     )
