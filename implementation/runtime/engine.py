@@ -122,6 +122,14 @@ from implementation.runtime.dashboard import (
     RuntimeDashboard,
 )
 
+from implementation.runtime.report_builder import (
+    ReportBuilder,
+)
+
+from implementation.runtime.mission_report_builder import (
+    MissionReportBuilder,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -181,6 +189,10 @@ class RuntimeEngine:
     lifecycle: RuntimeLifecycle
 
     dashboard: RuntimeDashboard
+
+    report_builder: ReportBuilder
+
+    mission_report_builder: MissionReportBuilder
 
 def bootstrap(
     validate: bool = True,
@@ -385,6 +397,16 @@ def bootstrap(
         outcome_engine=outcome_engine,
     )
 
+    report_builder = ReportBuilder(
+        dashboard
+    )
+
+    mission_report_builder = (
+        MissionReportBuilder(
+            mission_projection
+        )
+    )
+
     #
     # Runtime Container
     #
@@ -417,4 +439,6 @@ def bootstrap(
         mission_projection=mission_projection,
         query=query,
         dashboard=dashboard,
+        report_builder=report_builder,
+        mission_report_builder=mission_report_builder,
     )
