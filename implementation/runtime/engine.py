@@ -90,6 +90,14 @@ from implementation.runtime.hooks.outcome_hook import (
     OutcomeHook,
 )
 
+from implementation.runtime.hooks.decision_hook import (
+    DecisionHook,
+)
+
+from implementation.runtime.hooks.artifact_hook import (
+    ArtifactHook,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -171,6 +179,8 @@ def bootstrap(
 
     outcome_engine = OutcomeEngine()
 
+    artifact_engine = ArtifactEngine()
+
     #
     # Builders / Services
     #
@@ -209,6 +219,24 @@ def bootstrap(
     lifecycle.register(
         "workflow.completed",
         outcome_hook,
+    )
+
+    decision_hook = DecisionHook(
+        decision_engine=decision_engine,
+    )
+
+    lifecycle.register(
+        "workflow.completed",
+        decision_hook,
+    )
+
+    artifact_hook = ArtifactHook(
+        artifact_engine=artifact_engine,
+    )
+
+    lifecycle.register(
+        "workflow.completed",
+        artifact_hook,
     )
 
     #
