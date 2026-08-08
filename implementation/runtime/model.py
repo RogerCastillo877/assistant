@@ -41,6 +41,8 @@ class Mission:
 
     tags: list[str] = field(default_factory=list)
 
+    agents: list[str] = field(default_factory=list)
+
 
 # ============================================================
 # Policy

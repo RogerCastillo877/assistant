@@ -58,6 +58,7 @@ def _build_mission(data: dict) -> Mission:
         memory=data.get("memory", True),
         human_approval=data.get("human_approval", False),
         tags=data.get("tags", []),
+        agents=data.get("agents", []),
     )
 
 

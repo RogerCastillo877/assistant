@@ -98,6 +98,18 @@ from implementation.runtime.hooks.artifact_hook import (
     ArtifactHook,
 )
 
+from implementation.runtime.projection_engine import (
+    ProjectionEngine,
+)
+
+from implementation.runtime.mission_executor import (
+    MissionExecutor,
+)
+
+from implementation.runtime.mission_runtime import (
+    MissionRuntime,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -122,6 +134,8 @@ class RuntimeEngine:
 
     memory_engine: MemoryEngine
 
+    projection: ProjectionEngine
+
     knowledge_builder: KnowledgeBuilder
 
     traceability: TraceabilityEngine
@@ -131,6 +145,10 @@ class RuntimeEngine:
     skill_executor: SkillExecutor
 
     capability_executor: CapabilityExecutor
+
+    mission_executor: MissionExecutor
+
+    mission_runtime: MissionRuntime
 
     policy_engine: PolicyEngine
 
@@ -261,6 +279,15 @@ def bootstrap(
         registry=registry,
     )
 
+    projection = ProjectionEngine(
+        memory_engine=memory,
+        knowledge_engine=knowledge,
+        traceability_engine=traceability,
+        artifact_engine=artifact_engine,
+        decision_engine=decision_engine,
+        outcome_engine=outcome_engine,
+    )
+
     executor = WorkflowExecutor(
         registry=registry,
         events=events,
@@ -279,6 +306,16 @@ def bootstrap(
         registry=registry,
         agent_executor=agent_executor,
         memory_engine=memory,
+    )
+
+    mission_executor = MissionExecutor(
+    registry=registry,
+    agent_runtime=agent_runtime,
+    )
+
+    mission_runtime = MissionRuntime(
+        registry=registry,
+        mission_executor=mission_executor,
     )
 
     #
@@ -309,6 +346,7 @@ def bootstrap(
         knowledge=knowledge,
         decision_engine=decision_engine,
         memory_engine=memory,
+        projection=projection,
         knowledge_builder=knowledge_builder,
         traceability=traceability,
         traceability_service=traceability_service,
@@ -321,4 +359,6 @@ def bootstrap(
         agent_runtime=agent_runtime,
         knowledge_pipeline=knowledge_pipeline,
         lifecycle=lifecycle,
+        mission_executor=mission_executor,
+        mission_runtime=mission_runtime,
     )
