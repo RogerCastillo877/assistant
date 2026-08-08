@@ -48,6 +48,10 @@ from implementation.runtime.agent_runtime import (
     AgentRuntime,
 )
 
+from implementation.runtime.memory_engine import (
+    MemoryEngine,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -63,6 +67,8 @@ class RuntimeEngine:
     events: EventStore
 
     tool_executor: ToolExecutor
+
+    memory_engine: MemoryEngine
 
     skill_executor: SkillExecutor
 
@@ -91,6 +97,8 @@ def bootstrap(
 
     events = EventStore()
 
+    memory = MemoryEngine()
+
     tool_executor = ToolExecutor(
         registry=registry,
     )
@@ -114,6 +122,7 @@ def bootstrap(
         events=events,
         capability_executor=capability_executor,
         policy_engine=policy_engine,
+        memory_engine=memory,
     )
 
     agent_executor = AgentExecutor(
@@ -124,6 +133,7 @@ def bootstrap(
     agent_runtime = AgentRuntime(
         registry=registry,
         agent_executor=agent_executor,
+        memory_engine=memory,
     )
 
     return RuntimeEngine(
@@ -131,6 +141,7 @@ def bootstrap(
         registry=registry,
         resolver=resolver,
         events=events,
+        memory_engine=memory,
         tool_executor=tool_executor,
         skill_executor=skill_executor,
         capability_executor=capability_executor,

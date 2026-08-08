@@ -20,6 +20,11 @@ from implementation.runtime.agent_executor import (
     AgentExecutor,
 )
 
+from implementation.runtime.memory_engine import (
+    MemoryEngine,
+    MemoryRecord,
+)
+
 
 class AgentRuntime:
 
@@ -27,12 +32,17 @@ class AgentRuntime:
         self,
         registry: RuntimeRegistry,
         agent_executor: AgentExecutor,
+        memory_engine: MemoryEngine,
     ) -> None:
 
         self.registry = registry
 
         self.agent_executor = (
             agent_executor
+        )
+
+        self.memory_engine = (
+            memory_engine
         )
 
     def execute(
@@ -51,6 +61,23 @@ class AgentRuntime:
         self.agent_executor.execute(
             agent_id,
             context,
+        )
+
+        agent = self.registry.get_agent(
+            agent_id
+        )
+        self.memory_engine.store(
+            MemoryRecord(
+                id=f"memory-{agent.id}",
+                title=f"Execution of {agent.name}",
+                content="Agent executed successfully",
+                memory_type="execution",
+                tags=[
+                    "agent",
+                    agent.id
+                ],
+                source="agent-runtime",
+            )
         )
 
         return context

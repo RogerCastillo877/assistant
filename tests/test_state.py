@@ -18,6 +18,7 @@ def test_workflow_state():
         events=engine.events,
         policy_engine=engine.policy_engine,
         capability_executor=engine.capability_executor,
+        memory_engine=engine.memory_engine,
     )
 
     context = ExecutionContext(

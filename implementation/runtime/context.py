@@ -14,6 +14,10 @@ from implementation.runtime.state import (
     WorkflowState,
 )
 
+from implementation.runtime.memory_engine import (
+    MemoryEngine,
+)
+
 @dataclass(slots=True)
 class ExecutionContext:
 
@@ -22,6 +26,8 @@ class ExecutionContext:
     workflow_id: str | None = None
 
     state: WorkflowState | None = None
+
+    memory: MemoryEngine | None = None
 
     inputs: dict[str, Any] = field(
         default_factory=dict

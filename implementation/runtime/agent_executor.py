@@ -69,3 +69,5 @@ class AgentExecutor:
             context.execution_context = (
                 workflow_context
             )
+
+        return None

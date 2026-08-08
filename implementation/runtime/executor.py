@@ -34,6 +34,10 @@ from implementation.runtime.policy_engine import (
     PolicyEngine,
 )
 
+from implementation.runtime.memory_engine import (
+    MemoryEngine,
+)
+
 
 @dataclass(slots=True)
 class ExecutionResult:
@@ -53,12 +57,14 @@ class WorkflowExecutor:
         events: EventStore,
         policy_engine: PolicyEngine,
         capability_executor: CapabilityExecutor,
+        memory_engine: MemoryEngine,
     ) -> None:
 
         self.registry = registry
         self.events = events
         self.policy_engine = policy_engine
         self.capability_executor = capability_executor
+        self.memory_engine = memory_engine
 
     def execute(
         self,
@@ -80,7 +86,12 @@ class WorkflowExecutor:
 
             context = ExecutionContext(
                 workflow_id=workflow.id,
+                memory=self.memory_engine,
             )
+
+        if context.memory is None:
+
+            context.memory = self.memory_engine
 
         self.policy_engine.enforce_workflow(
             workflow,
@@ -188,6 +199,7 @@ class WorkflowExecutor:
         context = ExecutionContext(
             workflow_id=workflow_id,
             inputs=inputs or {},
+            memory=self.memory_engine,
         )
 
         self.execute(
