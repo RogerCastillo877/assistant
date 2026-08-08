@@ -57,6 +57,18 @@ from implementation.runtime.traceability_engine import (
     TraceabilityEngine,
 )
 
+from implementation.runtime.artifact_engine import (
+    ArtifactEngine,
+)
+
+from implementation.runtime.decision_engine import (
+    DecisionEngine,
+)
+
+from implementation.runtime.outcome_engine import (
+    OutcomeEngine,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -73,7 +85,11 @@ class RuntimeEngine:
 
     tool_executor: ToolExecutor
 
+    artifact_engine: ArtifactEngine
+
     knowledge: KnowledgeEngine
+
+    decision_engine: DecisionEngine
 
     memory_engine: MemoryEngine
 
@@ -84,6 +100,8 @@ class RuntimeEngine:
     capability_executor: CapabilityExecutor
 
     policy_engine: PolicyEngine
+
+    outcome_engine: OutcomeEngine
 
     executor: WorkflowExecutor
 
@@ -111,6 +129,12 @@ def bootstrap(
     knowledge = KnowledgeEngine()
 
     traceability = TraceabilityEngine()
+
+    artifact_engine = ArtifactEngine()
+
+    decision_engine = DecisionEngine()
+
+    outcome_engine = OutcomeEngine()
 
     tool_executor = ToolExecutor(
         registry=registry,
@@ -163,5 +187,8 @@ def bootstrap(
         agent_executor=agent_executor,
         agent_runtime=agent_runtime,
         traceability=traceability,
+        artifact_engine=artifact_engine,
+        decision_engine=decision_engine,
+        outcome_engine=outcome_engine,
         executor=executor,
     )
