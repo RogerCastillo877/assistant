@@ -146,6 +146,10 @@ from implementation.runtime.hooks.mission_run_hook import (
     MissionRunHook,
 )
 
+from implementation.runtime.mission_history_builder import (
+    MissionHistoryBuilder,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -211,6 +215,8 @@ class RuntimeEngine:
     report_builder: ReportBuilder
 
     mission_report_builder: MissionReportBuilder
+
+    mission_history_builder: MissionHistoryBuilder
 
     knowledge_document_builder: KnowledgeDocumentBuilder
 
@@ -371,6 +377,12 @@ def bootstrap(
         )
     )
 
+    mission_history_builder = (
+        MissionHistoryBuilder(
+            mission_run_engine
+        )
+    )
+
     knowledge_document_builder = (
         KnowledgeDocumentBuilder(
             mission_projection
@@ -492,6 +504,7 @@ def bootstrap(
         dashboard=dashboard,
         report_builder=report_builder,
         mission_report_builder=mission_report_builder,
+        mission_history_builder=mission_history_builder,
         search=search_service,
         knowledge_document_builder=knowledge_document_builder,
         mission_run_engine=mission_run_engine,
