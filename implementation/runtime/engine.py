@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from implementation.runtime.knowledge_engine import KnowledgeEngine
 from implementation.runtime.loader import load_project
 from implementation.runtime.project import Project
 from implementation.runtime.registry import RuntimeRegistry
@@ -52,6 +53,10 @@ from implementation.runtime.memory_engine import (
     MemoryEngine,
 )
 
+from implementation.runtime.traceability_engine import (
+    TraceabilityEngine,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -68,7 +73,11 @@ class RuntimeEngine:
 
     tool_executor: ToolExecutor
 
+    knowledge: KnowledgeEngine
+
     memory_engine: MemoryEngine
+
+    traceability: TraceabilityEngine
 
     skill_executor: SkillExecutor
 
@@ -98,6 +107,10 @@ def bootstrap(
     events = EventStore()
 
     memory = MemoryEngine()
+
+    knowledge = KnowledgeEngine()
+
+    traceability = TraceabilityEngine()
 
     tool_executor = ToolExecutor(
         registry=registry,
@@ -142,11 +155,13 @@ def bootstrap(
         resolver=resolver,
         events=events,
         memory_engine=memory,
+        knowledge=knowledge,
         tool_executor=tool_executor,
         skill_executor=skill_executor,
         capability_executor=capability_executor,
         policy_engine=policy_engine,
         agent_executor=agent_executor,
         agent_runtime=agent_runtime,
+        traceability=traceability,
         executor=executor,
     )
