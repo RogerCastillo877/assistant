@@ -134,6 +134,10 @@ from implementation.runtime.search_service import (
     SearchService,
 )
 
+from implementation.runtime.knowledge_document_builder import (
+    KnowledgeDocumentBuilder,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -199,6 +203,8 @@ class RuntimeEngine:
     report_builder: ReportBuilder
 
     mission_report_builder: MissionReportBuilder
+
+    knowledge_document_builder: KnowledgeDocumentBuilder
 
 def bootstrap(
     validate: bool = True,
@@ -336,6 +342,18 @@ def bootstrap(
         )
     )
 
+    mission_report_builder = (
+        MissionReportBuilder(
+            mission_projection
+        )
+    )
+
+    knowledge_document_builder = (
+        KnowledgeDocumentBuilder(
+            mission_projection
+        )
+    )
+
     query = QueryEngine(
         memory_engine=memory,
         knowledge_engine=knowledge,
@@ -451,5 +469,6 @@ def bootstrap(
         dashboard=dashboard,
         report_builder=report_builder,
         mission_report_builder=mission_report_builder,
-        search=search_service
+        search=search_service,
+        knowledge_document_builder=knowledge_document_builder,
     )
