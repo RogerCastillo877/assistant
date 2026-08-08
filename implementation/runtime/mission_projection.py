@@ -1,0 +1,54 @@
+"""
+OSEF Runtime
+
+mission_projection.py
+
+Mission projection model.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+from implementation.runtime.memory_engine import (
+    MemoryRecord,
+)
+
+from implementation.runtime.knowledge_engine import (
+    KnowledgeRecord,
+)
+
+from implementation.runtime.model import Mission
+from implementation.runtime.trace_record import (
+    TraceRecord,
+)
+
+from implementation.runtime.artifact_record import (
+    ArtifactRecord,
+)
+
+from implementation.runtime.decision_record import (
+    DecisionRecord,
+)
+
+from implementation.runtime.outcome_record import (
+    OutcomeRecord,
+)
+
+
+@dataclass(slots=True)
+class MissionProjection:
+
+    mission: Mission
+
+    memories: list[MemoryRecord]
+
+    knowledge: list[KnowledgeRecord]
+
+    traces: list[TraceRecord]
+
+    artifacts: list[ArtifactRecord]
+
+    decisions: list[DecisionRecord]
+
+    outcomes: list[OutcomeRecord]

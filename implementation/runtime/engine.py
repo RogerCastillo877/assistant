@@ -110,6 +110,14 @@ from implementation.runtime.mission_runtime import (
     MissionRuntime,
 )
 
+from implementation.runtime.mission_projection_engine import (
+    MissionProjectionEngine,
+)
+
+from implementation.runtime.query_engine import (
+    QueryEngine,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -150,9 +158,13 @@ class RuntimeEngine:
 
     mission_runtime: MissionRuntime
 
+    mission_projection: MissionProjectionEngine
+
     policy_engine: PolicyEngine
 
     outcome_engine: OutcomeEngine
+
+    query: QueryEngine
 
     executor: WorkflowExecutor
 
@@ -288,6 +300,27 @@ def bootstrap(
         outcome_engine=outcome_engine,
     )
 
+    mission_projection = (
+        MissionProjectionEngine(
+            registry=registry,
+            memory_engine=memory,
+            knowledge_engine=knowledge,
+            traceability_engine=traceability,
+            artifact_engine=artifact_engine,
+            decision_engine=decision_engine,
+            outcome_engine=outcome_engine,
+        )
+    )
+
+    query = QueryEngine(
+        memory_engine=memory,
+        knowledge_engine=knowledge,
+        traceability_engine=traceability,
+        artifact_engine=artifact_engine,
+        decision_engine=decision_engine,
+        outcome_engine=outcome_engine,
+    )
+
     executor = WorkflowExecutor(
         registry=registry,
         events=events,
@@ -361,4 +394,6 @@ def bootstrap(
         lifecycle=lifecycle,
         mission_executor=mission_executor,
         mission_runtime=mission_runtime,
+        mission_projection=mission_projection,
+        query=query,
     )
