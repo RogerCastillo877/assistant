@@ -19,6 +19,7 @@ def test_execute_learning_workflow():
         policy_engine=engine.policy_engine,
         capability_executor=engine.capability_executor,
         memory_engine=engine.memory_engine,
+        lifecycle=engine.lifecycle,
     )
 
     context = ExecutionContext(

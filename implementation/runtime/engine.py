@@ -10,6 +10,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from implementation.runtime.hooks.knowledge_pipeline_hook import KnowledgePipelineHook
 from implementation.runtime.knowledge_engine import KnowledgeEngine
 from implementation.runtime.loader import load_project
 from implementation.runtime.project import Project
@@ -81,6 +82,14 @@ from implementation.runtime.knowledge_pipeline import (
     KnowledgePipeline,
 )
 
+from implementation.runtime.runtime_lifecycle import (
+    RuntimeLifecycle,
+)
+
+from implementation.runtime.hooks.outcome_hook import (
+    OutcomeHook,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -127,6 +136,8 @@ class RuntimeEngine:
 
     knowledge_pipeline: KnowledgePipeline
 
+    lifecycle: RuntimeLifecycle
+
 def bootstrap(
     validate: bool = True,
 ) -> RuntimeEngine:
@@ -142,6 +153,12 @@ def bootstrap(
 
     events = EventStore()
 
+    lifecycle = RuntimeLifecycle()
+
+    #
+    # Core Engines
+    #
+
     memory = MemoryEngine()
 
     knowledge = KnowledgeEngine()
@@ -153,6 +170,50 @@ def bootstrap(
     decision_engine = DecisionEngine()
 
     outcome_engine = OutcomeEngine()
+
+    #
+    # Builders / Services
+    #
+
+    knowledge_builder = KnowledgeBuilder(
+        memory_engine=memory,
+        knowledge_engine=knowledge,
+    )
+
+    traceability_service = TraceabilityService(
+        traceability_engine=traceability,
+    )
+
+    knowledge_pipeline = KnowledgePipeline(
+        knowledge_builder=knowledge_builder,
+        traceability_service=traceability_service,
+    )
+
+    #
+    # Lifecycle Hooks
+    #
+
+    hook = KnowledgePipelineHook(
+        knowledge_pipeline
+    )
+
+    lifecycle.register(
+        "workflow.completed",
+        hook,
+    )
+
+    outcome_hook = OutcomeHook(
+        outcome_engine
+    )
+
+    lifecycle.register(
+        "workflow.completed",
+        outcome_hook,
+    )
+
+    #
+    # Runtime Executors
+    #
 
     tool_executor = ToolExecutor(
         registry=registry,
@@ -178,20 +239,7 @@ def bootstrap(
         capability_executor=capability_executor,
         policy_engine=policy_engine,
         memory_engine=memory,
-    )
-
-    knowledge_builder = KnowledgeBuilder(
-        memory_engine=memory,
-        knowledge_engine=knowledge,
-    )
-
-    traceability_service = TraceabilityService(
-        traceability_engine=traceability
-    )
-
-    knowledge_pipeline = KnowledgePipeline(
-        knowledge_builder=knowledge_builder,
-        traceability_service=traceability_service,
+        lifecycle=lifecycle,
     )
 
     agent_executor = AgentExecutor(
@@ -205,25 +253,44 @@ def bootstrap(
         memory_engine=memory,
     )
 
+    #
+    # Validation
+    #
+
+    if validate:
+
+        report = resolver.validate()
+
+        if not report.valid:
+
+            raise ResolutionError(
+                "\n".join(report.errors)
+            )
+
+    #
+    # Runtime Container
+    #
+
     return RuntimeEngine(
         project=project,
         registry=registry,
         resolver=resolver,
         events=events,
-        memory_engine=memory,
-        knowledge=knowledge,
         tool_executor=tool_executor,
+        artifact_engine=artifact_engine,
+        knowledge=knowledge,
+        decision_engine=decision_engine,
+        memory_engine=memory,
+        knowledge_builder=knowledge_builder,
+        traceability=traceability,
+        traceability_service=traceability_service,
         skill_executor=skill_executor,
         capability_executor=capability_executor,
         policy_engine=policy_engine,
-        agent_executor=agent_executor,
-        agent_runtime=agent_runtime,
-        traceability=traceability,
-        artifact_engine=artifact_engine,
-        decision_engine=decision_engine,
         outcome_engine=outcome_engine,
         executor=executor,
-        knowledge_builder=knowledge_builder,
-        traceability_service=traceability_service,
+        agent_executor=agent_executor,
+        agent_runtime=agent_runtime,
         knowledge_pipeline=knowledge_pipeline,
+        lifecycle=lifecycle,
     )

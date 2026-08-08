@@ -38,6 +38,9 @@ from implementation.runtime.memory_engine import (
     MemoryEngine,
 )
 
+from implementation.runtime.runtime_lifecycle import (
+    RuntimeLifecycle,
+)
 
 @dataclass(slots=True)
 class ExecutionResult:
@@ -58,6 +61,7 @@ class WorkflowExecutor:
         policy_engine: PolicyEngine,
         capability_executor: CapabilityExecutor,
         memory_engine: MemoryEngine,
+        lifecycle: RuntimeLifecycle,
     ) -> None:
 
         self.registry = registry
@@ -65,7 +69,7 @@ class WorkflowExecutor:
         self.policy_engine = policy_engine
         self.capability_executor = capability_executor
         self.memory_engine = memory_engine
-
+        self.lifecycle = lifecycle
     def execute(
         self,
         workflow_id: str,
@@ -181,6 +185,15 @@ class WorkflowExecutor:
             {
                 "workflow_id": workflow.id,
                 "completed_steps": completed,
+            },
+        )
+
+        self.lifecycle.emit(
+            "workflow.completed",
+            {
+                "workflow_id": workflow.id,
+                "completed_steps": completed,
+                "context": context,
             },
         )
 
