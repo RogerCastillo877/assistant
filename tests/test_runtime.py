@@ -1,5 +1,8 @@
 from implementation.runtime.engine import bootstrap
 
+from tests.common import (
+    assert_registry_loaded
+)
 
 def test_runtime_bootstrap():
 
@@ -9,24 +12,19 @@ def test_runtime_bootstrap():
 
     assert runtime.project.loaded is True
 
-    assert len(runtime.project.missions) == 1
+    assert (
+        "learning"
+        in runtime.registry.missions
+    )
 
-    assert len(runtime.project.agents) == 1
+    assert (
+        "marketing-content"
+        in runtime.registry.missions
+    )
 
-    assert len(runtime.project.workflows) == 1
-
-    assert len(runtime.project.capabilities) == 1
-
-    assert len(runtime.project.skills) == 1
-
-    assert len(runtime.project.tools) == 1
-
-    assert len(runtime.project.resources) == 1
-
-    assert len(runtime.project.memory) == 1
-
-    assert len(runtime.project.knowledge) == 1
-
+    assert_registry_loaded(
+        runtime.registry
+    )
 
 def test_registry_resolution():
 

@@ -1,0 +1,35 @@
+metadata:
+  DocumentID: OSEF-WFL-002
+  Title: Marketing Content Workflow
+  Version: 0.1.0
+  Status: Approved
+
+workflow:
+
+  id: marketing-content-workflow
+
+  name: Marketing Content Workflow
+
+  purpose: Produce a marketing content proposal.
+
+  version: "0.1.0"
+
+  status: active
+
+  steps:
+
+    - id: analyze-topic
+      name: Analyze Topic
+      capability: planning
+
+    - id: research
+      name: Research Topic
+      capability: planning
+
+    - id: generate-content
+      name: Generate Content
+      capability: planning
+
+    - id: store-knowledge
+      name: Store Knowledge
+      capability: planning

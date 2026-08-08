@@ -1,0 +1,26 @@
+metadata:
+  DocumentID: OSEF-AGT-002
+  Title: Marketing Strategist
+  Version: 0.1.0
+  Status: Approved
+
+agent:
+
+  id: marketing-strategist
+
+  name: Marketing Strategist
+
+  purpose: Create marketing content plans.
+
+  version: "0.1.0"
+
+  status: active
+
+  workflows:
+    - marketing-content-workflow
+
+  capabilities:
+    - planning
+
+  tags:
+    - marketing

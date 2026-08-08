@@ -1,0 +1,63 @@
+metadata:
+  DocumentID: OSEF-MIS-002
+  Title: Marketing Content Mission
+  Version: 0.1.0
+  Status: Approved
+  Authority: Normative
+  Owner: OSEF
+  Classification: Public
+  Created: 2026-08-08
+  LastUpdated: 2026-08-08
+
+mission:
+
+  id: marketing-content
+
+  name: Marketing Content Mission
+
+  purpose: Generate reusable marketing content from a topic.
+
+  description: >
+    Demonstration mission used to validate end-to-end
+    OSEF execution for content generation.
+
+  version: "0.1.0"
+
+  status: active
+
+  priority: high
+
+  owner: Rocas
+
+  domain: marketing
+
+  workflows:
+    - marketing-content-workflow
+
+  policies:
+    - default-governance
+
+  requirements:
+    - topic-input
+
+  success_criteria:
+    - content-generated
+    - knowledge-generated
+
+  metrics:
+    completion_rate: 100
+
+  knowledge_outputs:
+    - marketing-content-pattern
+
+  memory: true
+
+  human_approval: false
+
+  tags:
+    - marketing
+    - content
+    - example
+
+  agents:
+    - marketing-strategist
