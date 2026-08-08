@@ -69,6 +69,18 @@ from implementation.runtime.outcome_engine import (
     OutcomeEngine,
 )
 
+from implementation.runtime.knowledge_builder import (
+    KnowledgeBuilder,
+)
+
+from implementation.runtime.traceability_service import (
+    TraceabilityService,
+)
+
+from implementation.runtime.knowledge_pipeline import (
+    KnowledgePipeline,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -93,7 +105,11 @@ class RuntimeEngine:
 
     memory_engine: MemoryEngine
 
+    knowledge_builder: KnowledgeBuilder
+
     traceability: TraceabilityEngine
+
+    traceability_service: TraceabilityService
 
     skill_executor: SkillExecutor
 
@@ -108,6 +124,8 @@ class RuntimeEngine:
     agent_executor: AgentExecutor
 
     agent_runtime: AgentRuntime
+
+    knowledge_pipeline: KnowledgePipeline
 
 def bootstrap(
     validate: bool = True,
@@ -162,6 +180,20 @@ def bootstrap(
         memory_engine=memory,
     )
 
+    knowledge_builder = KnowledgeBuilder(
+        memory_engine=memory,
+        knowledge_engine=knowledge,
+    )
+
+    traceability_service = TraceabilityService(
+        traceability_engine=traceability
+    )
+
+    knowledge_pipeline = KnowledgePipeline(
+        knowledge_builder=knowledge_builder,
+        traceability_service=traceability_service,
+    )
+
     agent_executor = AgentExecutor(
         registry=registry,
         workflow_executor=executor,
@@ -191,4 +223,7 @@ def bootstrap(
         decision_engine=decision_engine,
         outcome_engine=outcome_engine,
         executor=executor,
+        knowledge_builder=knowledge_builder,
+        traceability_service=traceability_service,
+        knowledge_pipeline=knowledge_pipeline,
     )
