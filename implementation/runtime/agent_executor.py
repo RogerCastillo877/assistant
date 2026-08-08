@@ -62,6 +62,7 @@ class AgentExecutor:
                 self.workflow_executor
                 .execute_with_context(
                     workflow_id=workflow_id,
+                    mission_id=context.mission_id,
                     inputs=context.inputs,
                 )
             )

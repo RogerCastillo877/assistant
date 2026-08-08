@@ -138,6 +138,14 @@ from implementation.runtime.knowledge_document_builder import (
     KnowledgeDocumentBuilder,
 )
 
+from implementation.runtime.mission_run_engine import (
+    MissionRunEngine,
+)
+
+from implementation.runtime.hooks.mission_run_hook import (
+    MissionRunHook,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -206,6 +214,8 @@ class RuntimeEngine:
 
     knowledge_document_builder: KnowledgeDocumentBuilder
 
+    mission_run_engine: MissionRunEngine
+
 def bootstrap(
     validate: bool = True,
 ) -> RuntimeEngine:
@@ -222,6 +232,8 @@ def bootstrap(
     events = EventStore()
 
     lifecycle = RuntimeLifecycle()
+
+    mission_run_engine = (MissionRunEngine())
 
     #
     # Core Engines
@@ -297,6 +309,17 @@ def bootstrap(
     lifecycle.register(
         "workflow.completed",
         artifact_hook,
+    )
+
+    mission_run_hook = (
+        MissionRunHook(
+            mission_run_engine
+        )
+    )
+
+    lifecycle.register(
+        "workflow.completed",
+        mission_run_hook,
     )
 
     #
@@ -471,4 +494,5 @@ def bootstrap(
         mission_report_builder=mission_report_builder,
         search=search_service,
         knowledge_document_builder=knowledge_document_builder,
+        mission_run_engine=mission_run_engine,
     )

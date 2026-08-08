@@ -206,11 +206,13 @@ class WorkflowExecutor:
     def execute_with_context(
         self,
         workflow_id: str,
+        mission_id: str | None = None,
         inputs: dict | None = None,
     ) -> ExecutionContext:
 
         context = ExecutionContext(
             workflow_id=workflow_id,
+            mission_id=mission_id,
             inputs=inputs or {},
             memory=self.memory_engine,
         )
