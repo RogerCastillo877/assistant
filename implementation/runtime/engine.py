@@ -130,6 +130,10 @@ from implementation.runtime.mission_report_builder import (
     MissionReportBuilder,
 )
 
+from implementation.runtime.search_service import (
+    SearchService,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -177,6 +181,8 @@ class RuntimeEngine:
     outcome_engine: OutcomeEngine
 
     query: QueryEngine
+
+    search: SearchService
 
     executor: WorkflowExecutor
 
@@ -339,6 +345,10 @@ def bootstrap(
         outcome_engine=outcome_engine,
     )
 
+    search_service = SearchService(
+        query_engine=query,
+    )
+
     executor = WorkflowExecutor(
         registry=registry,
         events=events,
@@ -441,4 +451,5 @@ def bootstrap(
         dashboard=dashboard,
         report_builder=report_builder,
         mission_report_builder=mission_report_builder,
+        search=search_service
     )
