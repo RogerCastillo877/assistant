@@ -53,6 +53,7 @@ from implementation.runtime.hooks.mission_run_hook import (MissionRunHook)
 from implementation.runtime.mission_history_builder import (MissionHistoryBuilder)
 from implementation.runtime.knowledge_pack_builder import (KnowledgePackBuilder)
 from implementation.runtime.knowledge_search_engine import (KnowledgeSearchEngine)
+from implementation.runtime.knowledge_pack_exporter import (KnowledgePackExporter)
 
 @dataclass(slots=True)
 class RuntimeEngine:
@@ -129,6 +130,8 @@ class RuntimeEngine:
     mission_run_engine: MissionRunEngine
 
     knowledge_search: KnowledgeSearchEngine
+
+    knowledge_pack_exporter: KnowledgePackExporter
 
 def bootstrap(
     validate: bool = True,
@@ -305,6 +308,17 @@ def bootstrap(
         )
     )
 
+    knowledge_pack_builder = (
+        KnowledgePackBuilder(
+            registry=registry,
+            mission_projection=mission_projection,
+        )
+    )
+
+    knowledge_pack_exporter = (
+        KnowledgePackExporter()
+    )
+
     mission_report_builder = (
         MissionReportBuilder(
             mission_projection
@@ -438,5 +452,6 @@ def bootstrap(
         knowledge_document_builder=knowledge_document_builder,
         knowledge_pack_builder=knowledge_pack_builder,
         knowledge_search=knowledge_search,
+        knowledge_pack_exporter=knowledge_pack_exporter,
         mission_run_engine=mission_run_engine,
     )
