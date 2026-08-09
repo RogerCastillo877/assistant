@@ -44,6 +44,6 @@ def test_knowledge_pack_builder():
     )
 
     assert (
-        "Knowledge Items"
+        "Workflow marketing-content-workflow"
         in pack.content
     )
