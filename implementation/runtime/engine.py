@@ -55,6 +55,7 @@ from implementation.runtime.knowledge_pack_builder import (KnowledgePackBuilder)
 from implementation.runtime.knowledge_search_engine import (KnowledgeSearchEngine)
 from implementation.runtime.knowledge_pack_exporter import (KnowledgePackExporter)
 from implementation.runtime.knowledge_catalog_builder import (KnowledgeCatalogBuilder)
+from implementation.runtime.knowledge_catalog_exporter import (KnowledgeCatalogExporter)
 
 @dataclass(slots=True)
 class RuntimeEngine:
@@ -136,6 +137,8 @@ class RuntimeEngine:
 
     knowledge_catalog_builder: KnowledgeCatalogBuilder
 
+    knowledge_catalog_exporter: KnowledgeCatalogExporter
+
 def bootstrap(
     validate: bool = True,
 ) -> RuntimeEngine:
@@ -170,8 +173,6 @@ def bootstrap(
     decision_engine = DecisionEngine()
 
     outcome_engine = OutcomeEngine()
-
-    artifact_engine = ArtifactEngine()
 
     #
     # Builders / Services
@@ -311,21 +312,8 @@ def bootstrap(
         )
     )
 
-    knowledge_pack_builder = (
-        KnowledgePackBuilder(
-            registry=registry,
-            mission_projection=mission_projection,
-        )
-    )
-
     knowledge_pack_exporter = (
         KnowledgePackExporter()
-    )
-
-    mission_report_builder = (
-        MissionReportBuilder(
-            mission_projection
-        )
     )
 
     knowledge_pack_builder = (
@@ -339,6 +327,10 @@ def bootstrap(
         KnowledgeCatalogBuilder(
             knowledge_engine=knowledge,
         )
+    )
+
+    knowledge_catalog_exporter = (
+        KnowledgeCatalogExporter()
     )
 
     query = QueryEngine(
@@ -416,12 +408,6 @@ def bootstrap(
         dashboard
     )
 
-    mission_report_builder = (
-        MissionReportBuilder(
-            mission_projection
-        )
-    )
-
     #
     # Runtime Container
     #
@@ -463,5 +449,6 @@ def bootstrap(
         knowledge_search=knowledge_search,
         knowledge_pack_exporter=knowledge_pack_exporter,
         knowledge_catalog_builder=knowledge_catalog_builder,
+        knowledge_catalog_exporter=knowledge_catalog_exporter,
         mission_run_engine=mission_run_engine,
     )
