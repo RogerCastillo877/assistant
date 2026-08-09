@@ -10,52 +10,54 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from implementation.runtime.hooks.knowledge_pipeline_hook import KnowledgePipelineHook
-from implementation.runtime.knowledge_engine import KnowledgeEngine
-from implementation.runtime.loader import load_project
-from implementation.runtime.project import Project
-from implementation.runtime.registry import RuntimeRegistry
-from implementation.runtime.resolver import RuntimeResolver
-from implementation.runtime.errors import ResolutionError
-
-from implementation.runtime.events import (EventStore)
-from implementation.runtime.executor import (WorkflowExecutor)
-from implementation.runtime.tool_executor import (ToolExecutor)
-from implementation.runtime.skill_executor import (SkillExecutor)
-from implementation.runtime.capability_executor import (CapabilityExecutor)
-from implementation.runtime.policy_engine import (PolicyEngine)
 from implementation.runtime.agent_executor import (AgentExecutor)
 from implementation.runtime.agent_runtime import (AgentRuntime)
-from implementation.runtime.memory_engine import (MemoryEngine)
-from implementation.runtime.traceability_engine import (TraceabilityEngine)
 from implementation.runtime.artifact_engine import (ArtifactEngine)
-from implementation.runtime.decision_engine import (DecisionEngine)
-from implementation.runtime.outcome_engine import (OutcomeEngine)
-from implementation.runtime.knowledge_builder import (KnowledgeBuilder)
-from implementation.runtime.traceability_service import (TraceabilityService)
-from implementation.runtime.knowledge_pipeline import (KnowledgePipeline)
-from implementation.runtime.runtime_lifecycle import (RuntimeLifecycle)
-from implementation.runtime.hooks.outcome_hook import (OutcomeHook)
-from implementation.runtime.hooks.decision_hook import (DecisionHook)
-from implementation.runtime.hooks.artifact_hook import (ArtifactHook)
-from implementation.runtime.projection_engine import (ProjectionEngine)
-from implementation.runtime.mission_executor import (MissionExecutor)
-from implementation.runtime.mission_runtime import (MissionRuntime)
-from implementation.runtime.mission_projection_engine import (MissionProjectionEngine)
-from implementation.runtime.query_engine import (QueryEngine)
+from implementation.runtime.capability_executor import (CapabilityExecutor)
 from implementation.runtime.dashboard import (RuntimeDashboard)
-from implementation.runtime.report_builder import (ReportBuilder)
-from implementation.runtime.mission_report_builder import (MissionReportBuilder)
-from implementation.runtime.search_service import (SearchService)
-from implementation.runtime.knowledge_document_builder import (KnowledgeDocumentBuilder)
-from implementation.runtime.mission_run_engine import (MissionRunEngine)
+from implementation.runtime.decision_engine import (DecisionEngine)
+from implementation.runtime.errors import (ResolutionError)
+from implementation.runtime.events import (EventStore)
+from implementation.runtime.executor import (WorkflowExecutor)
+from implementation.runtime.hooks.artifact_hook import (ArtifactHook)
+from implementation.runtime.hooks.decision_hook import (DecisionHook)
+from implementation.runtime.hooks.knowledge_pipeline_hook import (KnowledgePipelineHook)
 from implementation.runtime.hooks.mission_run_hook import (MissionRunHook)
-from implementation.runtime.mission_history_builder import (MissionHistoryBuilder)
-from implementation.runtime.knowledge_pack_builder import (KnowledgePackBuilder)
-from implementation.runtime.knowledge_search_engine import (KnowledgeSearchEngine)
-from implementation.runtime.knowledge_pack_exporter import (KnowledgePackExporter)
+from implementation.runtime.hooks.outcome_hook import (OutcomeHook)
+from implementation.runtime.knowledge_builder import KnowledgeBuilder
 from implementation.runtime.knowledge_catalog_builder import (KnowledgeCatalogBuilder)
 from implementation.runtime.knowledge_catalog_exporter import (KnowledgeCatalogExporter)
+from implementation.runtime.knowledge_document_builder import (KnowledgeDocumentBuilder)
+from implementation.runtime.knowledge_engine import (KnowledgeEngine)
+from implementation.runtime.knowledge_pack_builder import (KnowledgePackBuilder)
+from implementation.runtime.knowledge_pack_exporter import (KnowledgePackExporter)
+from implementation.runtime.knowledge_pipeline import (KnowledgePipeline)
+from implementation.runtime.knowledge_search_engine import (KnowledgeSearchEngine)
+from implementation.runtime.loader import (load_project)
+from implementation.runtime.memory_engine import (MemoryEngine)
+from implementation.runtime.mission_executor import (MissionExecutor)
+from implementation.runtime.mission_history_builder import (MissionHistoryBuilder)
+from implementation.runtime.mission_projection_engine import (MissionProjectionEngine)
+from implementation.runtime.mission_report_builder import (MissionReportBuilder)
+from implementation.runtime.mission_run_engine import (MissionRunEngine)
+from implementation.runtime.mission_runtime import (MissionRuntime)
+from implementation.runtime.outcome_engine import (OutcomeEngine)
+from implementation.runtime.policy_engine import (PolicyEngine)
+from implementation.runtime.project import (Project)
+from implementation.runtime.projection_engine import (ProjectionEngine)
+from implementation.runtime.query_engine import (QueryEngine)
+from implementation.runtime.registry import (RuntimeRegistry)
+from implementation.runtime.report_builder import (ReportBuilder)
+from implementation.runtime.resolver import (RuntimeResolver)
+from implementation.runtime.runtime_lifecycle import (RuntimeLifecycle)
+from implementation.runtime.search_service import (SearchService)
+from implementation.runtime.skill_executor import (SkillExecutor)
+from implementation.runtime.tool_executor import (ToolExecutor)
+from implementation.runtime.traceability_engine import (TraceabilityEngine)
+from implementation.runtime.traceability_service import (TraceabilityService)
+from implementation.runtime.web_search_knowledge_hook import (WebSearchKnowledgeHook)
+from implementation.runtime.web_search_service import (WebSearchService)
+from implementation.runtime.adapters.mock_web_search_adapter import (MockWebSearchAdapter)
 
 @dataclass(slots=True)
 class RuntimeEngine:
@@ -139,6 +141,18 @@ class RuntimeEngine:
 
     knowledge_catalog_exporter: KnowledgeCatalogExporter
 
+    web_search_service: WebSearchService
+
+    @property
+    def knowledge_engine(self) -> KnowledgeEngine:
+        return self.knowledge
+
+
+    @property
+    def traceability_engine(self) -> TraceabilityEngine:
+        return self.traceability
+
+
 def bootstrap(
     validate: bool = True,
 ) -> RuntimeEngine:
@@ -148,15 +162,21 @@ def bootstrap(
 
     project = load_project()
 
-    registry = RuntimeRegistry.build(project)
+    registry = RuntimeRegistry.build(
+        project
+    )
 
-    resolver = RuntimeResolver(registry)
+    resolver = RuntimeResolver(
+        registry
+    )
 
     events = EventStore()
 
     lifecycle = RuntimeLifecycle()
 
-    mission_run_engine = (MissionRunEngine())
+    mission_run_engine = (
+        MissionRunEngine()
+    )
 
     #
     # Core Engines
@@ -166,47 +186,86 @@ def bootstrap(
 
     knowledge = KnowledgeEngine()
 
-    traceability = TraceabilityEngine()
+    traceability = (
+        TraceabilityEngine()
+    )
 
-    artifact_engine = ArtifactEngine()
+    artifact_engine = (
+        ArtifactEngine()
+    )
 
-    decision_engine = DecisionEngine()
+    decision_engine = (
+        DecisionEngine()
+    )
 
-    outcome_engine = OutcomeEngine()
+    outcome_engine = (
+        OutcomeEngine()
+    )
 
     #
     # Builders / Services
     #
 
-    knowledge_builder = KnowledgeBuilder(
-        memory_engine=memory,
-        knowledge_engine=knowledge,
+    knowledge_builder = (
+        KnowledgeBuilder(
+            memory_engine=memory,
+            knowledge_engine=knowledge,
+        )
     )
 
-    traceability_service = TraceabilityService(
-        traceability_engine=traceability,
+    traceability_service = (
+        TraceabilityService(
+            traceability_engine=traceability,
+        )
     )
 
-    knowledge_pipeline = KnowledgePipeline(
-        knowledge_builder=knowledge_builder,
-        traceability_service=traceability_service,
+    knowledge_pipeline = (
+        KnowledgePipeline(
+            knowledge_builder=knowledge_builder,
+            traceability_service=traceability_service,
+        )
     )
 
     #
     # Lifecycle Hooks
     #
 
-    hook = KnowledgePipelineHook(
-        knowledge_pipeline
+    knowledge_pipeline_hook = (
+        KnowledgePipelineHook(
+            knowledge_pipeline
+        )
     )
 
     lifecycle.register(
         "workflow.completed",
-        hook,
+        knowledge_pipeline_hook,
     )
 
-    outcome_hook = OutcomeHook(
-        outcome_engine
+    #
+    # Web Search Knowledge Hook
+    #
+
+    web_search_knowledge_hook = (
+        WebSearchKnowledgeHook(
+            memory_engine=memory,
+            knowledge_engine=knowledge,
+            traceability_engine=traceability,
+        )
+    )
+
+    lifecycle.register(
+        "workflow.completed",
+        web_search_knowledge_hook,
+    )
+
+    #
+    # Other Lifecycle Hooks
+    #
+
+    outcome_hook = (
+        OutcomeHook(
+            outcome_engine
+        )
     )
 
     lifecycle.register(
@@ -214,8 +273,10 @@ def bootstrap(
         outcome_hook,
     )
 
-    decision_hook = DecisionHook(
-        decision_engine=decision_engine,
+    decision_hook = (
+        DecisionHook(
+            decision_engine=decision_engine,
+        )
     )
 
     lifecycle.register(
@@ -223,8 +284,10 @@ def bootstrap(
         decision_hook,
     )
 
-    artifact_hook = ArtifactHook(
-        artifact_engine=artifact_engine,
+    artifact_hook = (
+        ArtifactHook(
+            artifact_engine=artifact_engine,
+        )
     )
 
     lifecycle.register(
@@ -244,11 +307,28 @@ def bootstrap(
     )
 
     #
+    # Web Search
+    #
+
+    web_search_adapter = (
+        MockWebSearchAdapter()
+    )
+
+    web_search_service = (
+        WebSearchService(
+            web_search_adapter
+        )
+    )
+
+    #
     # Runtime Executors
     #
 
     tool_executor = ToolExecutor(
         registry=registry,
+        web_search_service=(
+            web_search_service
+        ),
     )
 
     skill_executor = SkillExecutor(
@@ -256,23 +336,35 @@ def bootstrap(
         tool_executor=tool_executor,
     )
 
-    capability_executor = CapabilityExecutor(
-        registry=registry,
-        skill_executor=skill_executor,
+    capability_executor = (
+        CapabilityExecutor(
+            registry=registry,
+            skill_executor=skill_executor,
+        )
     )
 
     policy_engine = PolicyEngine(
         registry=registry,
     )
 
-    projection = ProjectionEngine(
-        memory_engine=memory,
-        knowledge_engine=knowledge,
-        traceability_engine=traceability,
-        artifact_engine=artifact_engine,
-        decision_engine=decision_engine,
-        outcome_engine=outcome_engine,
+    #
+    # Global Projection
+    #
+
+    projection = (
+        ProjectionEngine(
+            memory_engine=memory,
+            knowledge_engine=knowledge,
+            traceability_engine=traceability,
+            artifact_engine=artifact_engine,
+            decision_engine=decision_engine,
+            outcome_engine=outcome_engine,
+        )
     )
+
+    #
+    # Mission Projection
+    #
 
     mission_projection = (
         MissionProjectionEngine(
@@ -285,6 +377,10 @@ def bootstrap(
             outcome_engine=outcome_engine,
         )
     )
+
+    #
+    # Builders
+    #
 
     mission_report_builder = (
         MissionReportBuilder(
@@ -304,23 +400,15 @@ def bootstrap(
         )
     )
 
-    knowledge_search = (
-        KnowledgeSearchEngine(
-            memory_engine=memory,
-            knowledge_engine=knowledge,
-            traceability_engine=traceability,
-        )
-    )
-
-    knowledge_pack_exporter = (
-        KnowledgePackExporter()
-    )
-
     knowledge_pack_builder = (
         KnowledgePackBuilder(
             registry=registry,
             mission_projection=mission_projection,
         )
+    )
+
+    knowledge_pack_exporter = (
+        KnowledgePackExporter()
     )
 
     knowledge_catalog_builder = (
@@ -332,6 +420,18 @@ def bootstrap(
     knowledge_catalog_exporter = (
         KnowledgeCatalogExporter()
     )
+
+    knowledge_search = (
+        KnowledgeSearchEngine(
+            memory_engine=memory,
+            knowledge_engine=knowledge,
+            traceability_engine=traceability,
+        )
+    )
+
+    #
+    # Query / Search
+    #
 
     query = QueryEngine(
         memory_engine=memory,
@@ -346,6 +446,10 @@ def bootstrap(
         query_engine=query,
     )
 
+    #
+    # Workflow Executor
+    #
+
     executor = WorkflowExecutor(
         registry=registry,
         events=events,
@@ -354,6 +458,10 @@ def bootstrap(
         memory_engine=memory,
         lifecycle=lifecycle,
     )
+
+    #
+    # Agent Runtime
+    #
 
     agent_executor = AgentExecutor(
         registry=registry,
@@ -366,9 +474,13 @@ def bootstrap(
         memory_engine=memory,
     )
 
+    #
+    # Mission Runtime
+    #
+
     mission_executor = MissionExecutor(
-    registry=registry,
-    agent_runtime=agent_runtime,
+        registry=registry,
+        agent_runtime=agent_runtime,
     )
 
     mission_runtime = MissionRuntime(
@@ -387,7 +499,9 @@ def bootstrap(
         if not report.valid:
 
             raise ResolutionError(
-                "\n".join(report.errors)
+                "\n".join(
+                    report.errors
+                )
             )
 
     #
@@ -404,8 +518,10 @@ def bootstrap(
         outcome_engine=outcome_engine,
     )
 
-    report_builder = ReportBuilder(
-        dashboard
+    report_builder = (
+        ReportBuilder(
+            dashboard
+        )
     )
 
     #
@@ -451,4 +567,5 @@ def bootstrap(
         knowledge_catalog_builder=knowledge_catalog_builder,
         knowledge_catalog_exporter=knowledge_catalog_exporter,
         mission_run_engine=mission_run_engine,
+        web_search_service=web_search_service,
     )

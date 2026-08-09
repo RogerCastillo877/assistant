@@ -22,9 +22,11 @@ class ToolExecutor:
     def __init__(
         self,
         registry: RuntimeRegistry,
+        web_search_service=None,
     ) -> None:
 
         self.registry = registry
+        self.web_search_service = web_search_service
 
     def execute(
         self,
@@ -46,14 +48,29 @@ class ToolExecutor:
             f"{tool.name}"
         )
 
-        result = {
-            "tool": tool.id,
-            "status": "success",
-            "results": [],
-        }
+        if tool.id == "web-search":
 
-        context.outputs[
-            f"tool:{tool.id}"
-        ] = result
+            query = (
+                context.inputs.get(
+                    "topic",
+                    ""
+                )
+            )
 
-        return result
+            results = (
+                self.web_search_service.search(
+                    query
+                )
+            )
+
+            result = {
+                "tool": tool.id,
+                "status": "success",
+                "results": results,
+            }
+
+            context.outputs[
+                f"tool:{tool.id}"
+            ] = result
+
+            return result
