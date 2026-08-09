@@ -150,6 +150,10 @@ from implementation.runtime.mission_history_builder import (
     MissionHistoryBuilder,
 )
 
+from implementation.runtime.knowledge_pack_builder import (
+    KnowledgePackBuilder,
+)
+
 @dataclass(slots=True)
 class RuntimeEngine:
     """
@@ -207,6 +211,8 @@ class RuntimeEngine:
     agent_runtime: AgentRuntime
 
     knowledge_pipeline: KnowledgePipeline
+
+    knowledge_pack_builder: KnowledgePackBuilder
 
     lifecycle: RuntimeLifecycle
 
@@ -389,6 +395,19 @@ def bootstrap(
         )
     )
 
+    mission_report_builder = (
+        MissionReportBuilder(
+            mission_projection
+        )
+    )
+
+    knowledge_pack_builder = (
+        KnowledgePackBuilder(
+            registry=registry,
+            mission_projection=mission_projection,
+        )
+    )
+
     query = QueryEngine(
         memory_engine=memory,
         knowledge_engine=knowledge,
@@ -507,5 +526,6 @@ def bootstrap(
         mission_history_builder=mission_history_builder,
         search=search_service,
         knowledge_document_builder=knowledge_document_builder,
+        knowledge_pack_builder=knowledge_pack_builder,
         mission_run_engine=mission_run_engine,
     )
