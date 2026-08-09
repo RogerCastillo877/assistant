@@ -54,6 +54,7 @@ from implementation.runtime.mission_history_builder import (MissionHistoryBuilde
 from implementation.runtime.knowledge_pack_builder import (KnowledgePackBuilder)
 from implementation.runtime.knowledge_search_engine import (KnowledgeSearchEngine)
 from implementation.runtime.knowledge_pack_exporter import (KnowledgePackExporter)
+from implementation.runtime.knowledge_catalog_builder import (KnowledgeCatalogBuilder)
 
 @dataclass(slots=True)
 class RuntimeEngine:
@@ -132,6 +133,8 @@ class RuntimeEngine:
     knowledge_search: KnowledgeSearchEngine
 
     knowledge_pack_exporter: KnowledgePackExporter
+
+    knowledge_catalog_builder: KnowledgeCatalogBuilder
 
 def bootstrap(
     validate: bool = True,
@@ -332,6 +335,12 @@ def bootstrap(
         )
     )
 
+    knowledge_catalog_builder = (
+        KnowledgeCatalogBuilder(
+            knowledge_engine=knowledge,
+        )
+    )
+
     query = QueryEngine(
         memory_engine=memory,
         knowledge_engine=knowledge,
@@ -453,5 +462,6 @@ def bootstrap(
         knowledge_pack_builder=knowledge_pack_builder,
         knowledge_search=knowledge_search,
         knowledge_pack_exporter=knowledge_pack_exporter,
+        knowledge_catalog_builder=knowledge_catalog_builder,
         mission_run_engine=mission_run_engine,
     )
